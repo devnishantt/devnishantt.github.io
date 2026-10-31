@@ -2,237 +2,352 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Nishant · try to break my backends</title>
-  <meta name="description" content="Backend engineer portfolio. Five live labs where you try to break the invariants my projects enforce: race conditions, retries, money, audit logs and approvals.">
+  <meta name="description" content="Backend engineer portfolio. Five live labs where you try to break the invariants my systems enforce: race conditions, retried payments, money precision, tamper-evident audit logs and two-person approvals.">
+  <meta name="author" content="Nishant">
   <meta property="og:title" content="Try to break my backends">
-  <meta property="og:description" content="Five live labs: race a withdrawal, replay a payment, split a bill, tamper with an audit log, sneak an incident closed.">
+  <meta property="og:description" content="Race a withdrawal, replay a payment, lose a cent, rewrite an audit log, close an incident alone. Five live labs by Nishant, backend engineer.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#0b0f17">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0f17'/%3E%3Cpath d='M9 22V10l14 12V10' fill='none' stroke='%2339d0d8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <meta property="og:url" content="https://devnishantt.github.io/">
+  <meta property="og:image" content="https://devnishantt.github.io/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#07080a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Cpath d='M9.5 22.5v-13l13 13v-13' fill='none' stroke='%23f2f3f5' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/site.css">
+  <script>document.documentElement.classList.add("js")</script>
   <script type="module" src="js/main.js"></script>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></symbol>
+      <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8.5 8.5M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/></symbol>
+      <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" stroke="none" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="backdrop" aria-hidden="true"><div class="backdrop-grid"></div><div class="backdrop-glow"></div><div class="backdrop-spot"></div></div>
   <a class="skip-link" href="#labs">Skip to the labs</a>
 
   <header id="site-header">
-    <nav id="site-nav" aria-label="Primary">
-      <a class="brand" href="#top" aria-label="Nishant, home"><span class="brand-mark">n</span><span class="brand-path">devnishantt/</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Nishant, back to top">
+        <span class="brand-mark" aria-hidden="true">N</span><span class="brand-name">Nishant</span>
+      </a>
       <ul class="nav-links">
-        <li><a href="#labs">labs</a></li>
-        <li><a href="#status">status</a></li>
-        <li><a href="#work">work</a></li>
-        <li><a href="#contact">contact</a></li>
+        <li><a href="#labs">Labs</a></li>
+        <li><a href="#status">Status</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-      <a class="status-pill" id="nav-status" href="#status" aria-live="polite"><span class="dot"></span><span class="label">checking pipelines</span></a>
+      <a class="status-pill" id="nav-status" href="#status" aria-live="polite"><span class="dot"></span><span class="label">checking CI</span></a>
+      <a class="btn btn-small btn-light nav-email" href="mailto:nishanttgithub@gmail.com"><svg class="i"><use href="#i-mail"/></svg><span>Email me</span></a>
     </nav>
   </header>
 
   <main id="top">
+    <!-- ================================================================ hero -->
     <section id="hero" aria-labelledby="hero-title">
-      <p class="eyebrow">Nishant · backend engineer · TypeScript, Node.js, Python</p>
-      <h1 id="hero-title">Try to break my&nbsp;backends.</h1>
-      <p class="lede">
-        Most portfolios ask you to trust a list of skills. This one hands you five invariants my projects enforce
-        and the tools to attack them. Each lab runs the unsafe version first, so you can watch it fail,
-        then the version I ship. Every simulation runs in your browser and is covered by tests.
-      </p>
-      <div class="hero-actions">
-        <a class="button primary" href="#lab-race">Start with the race condition</a>
-        <a class="button" href="https://github.com/devnishantt">GitHub</a>
+      <div class="hero-copy">
+        <p class="kicker reveal"><span class="kicker-dot" aria-hidden="true"></span>Nishant <span class="sep">/</span> backend engineer <span class="sep">/</span> TypeScript, Node.js, Python</p>
+        <h1 id="hero-title" class="reveal">
+          <span class="h1-line">Try to <span class="crack"><span class="sr-only">break</span><span class="crack-a" aria-hidden="true">break</span><span class="crack-b" aria-hidden="true">break</span></span></span>
+          <span class="h1-line h1-dim">my backends.</span>
+        </h1>
+        <p class="lede reveal">Most portfolios ask you to trust a list of skills. This one hands you five invariants my systems enforce and the tools to attack them. Every lab runs the unsafe code first, so you can watch it fail, then the code I actually ship.</p>
+        <div class="cta-row reveal">
+          <a class="btn btn-light btn-lg" href="#lab-race">Start breaking things<svg class="i"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost btn-lg" href="mailto:nishanttgithub@gmail.com"><svg class="i"><use href="#i-mail"/></svg>nishanttgithub@gmail.com</a>
+        </div>
+        <ul class="proof reveal" aria-label="How this site is built">
+          <li><b>24</b> unit tests on the lab logic</li>
+          <li><b>5</b> labs driven in a real browser on every push</li>
+          <li><b>0</b> frameworks, trackers or build steps</li>
+        </ul>
       </div>
 
-      <aside id="scoreboard" aria-label="Your attempts so far">
-        <div class="score">
-          <span class="score-value" id="score-broken">0</span>
-          <span class="score-label">invariants you broke<br><small>in the unsafe versions</small></span>
+      <aside class="monitor reveal" id="monitor" aria-label="Invariant monitor for your session">
+        <div class="monitor-head">
+          <span class="rec" aria-hidden="true"></span>
+          <span class="monitor-title">invariant-monitor</span>
+          <span class="monitor-sub">your session</span>
         </div>
-        <div class="score">
-          <span class="score-value held" id="score-held">0</span>
-          <span class="score-label">attacks that held<br><small>against what I ship</small></span>
+        <ol class="monitor-rows" id="monitor-rows"></ol>
+        <div class="monitor-foot" id="scoreboard">
+          <div class="score"><span class="score-value broken" id="score-broken">0</span><span class="score-label">broken</span></div>
+          <div class="score"><span class="score-value held" id="score-held">0</span><span class="score-label">held</span></div>
+          <div class="score"><span class="score-value" id="score-labs">0/5</span><span class="score-label">labs tried</span></div>
+          <button class="icon-btn" id="score-reset" type="button" aria-label="Reset your score" title="Reset your score"><svg class="i"><use href="#i-reset"/></svg></button>
         </div>
-        <div class="score">
-          <span class="score-value" id="score-labs">0/5</span>
-          <span class="score-label">labs tried<br><small>saved in this browser</small></span>
-        </div>
-        <button class="link-button" id="score-reset" type="button">reset</button>
       </aside>
     </section>
 
+    <!-- ================================================================ labs -->
     <section id="labs" aria-labelledby="labs-title">
-      <header class="section-head">
-        <span class="section-code">0x01</span>
+      <header class="section-head reveal">
+        <p class="section-kicker">01 &mdash; 05</p>
         <h2 id="labs-title">The labs</h2>
-        <p>Five failure modes that cost real companies real money. Pick the unsafe mode, break it, then switch.</p>
+        <p class="section-lede">Five failure modes that have cost real companies real money. Pick the unsafe mode, break it, then switch to what I ship and try again.</p>
       </header>
 
-      <!-- Lab 01: race -->
-      <article class="lab" id="lab-race" aria-labelledby="race-title">
-        <header class="lab-head">
-          <span class="lab-num">01</span>
-          <div>
-            <h3 id="race-title">Withdraw the same money twice</h3>
-            <p class="invariant"><span>invariant</span> cash dispensed never exceeds what the account held</p>
-          </div>
-          <a class="lab-source" href="https://github.com/devnishantt/bank-management-system">bank-management-system</a>
-        </header>
-        <p class="lab-brief">Two ATMs withdraw 60 from an account holding 100 at the same instant. The database interleaves their statements.</p>
-        <div class="controls">
-          <fieldset class="segmented" id="race-mode">
-            <legend>How the withdrawal is written</legend>
-            <label><input type="radio" name="race-mode" value="naive" checked><span>read, then write</span></label>
-            <label><input type="radio" name="race-mode" value="locked"><span>SELECT … FOR UPDATE</span></label>
-            <label><input type="radio" name="race-mode" value="conditional"><span>conditional UPDATE</span></label>
-          </fieldset>
-          <div class="button-row">
-            <button class="button primary" id="race-run" type="button">Race once</button>
-            <button class="button" id="race-many" type="button">Race 1,000 times</button>
-          </div>
-        </div>
-        <code class="sql" id="race-sql"></code>
-        <div class="race-board" id="race-board" aria-live="polite"></div>
-        <div class="verdict" id="race-verdict" role="status"></div>
-      </article>
+      <div class="labs-layout">
+        <nav class="lab-rail" aria-label="Labs">
+          <ol id="lab-rail"></ol>
+          <p class="rail-hint"><kbd>1</kbd>&ndash;<kbd>5</kbd> to jump</p>
+        </nav>
 
-      <!-- Lab 02: idempotency -->
-      <article class="lab" id="lab-retry" aria-labelledby="retry-title">
-        <header class="lab-head">
-          <span class="lab-num">02</span>
-          <div>
-            <h3 id="retry-title">Get charged three times for one payment</h3>
-            <p class="invariant"><span>invariant</span> one payment intent becomes at most one charge</p>
-          </div>
-          <a class="lab-source" href="https://github.com/devnishantt/bank-management-system">bank-management-system</a>
-        </header>
-        <p class="lab-brief">The server charges the card, but the response is lost on the way back. The client times out and retries, as clients do.</p>
-        <div class="controls">
-          <label class="switch"><input type="checkbox" id="retry-key" checked><span>send an <code>Idempotency-Key</code></span></label>
-          <label class="range">responses lost <input type="range" id="retry-lost" min="0" max="3" value="2"><output id="retry-lost-out">2</output></label>
-          <label class="switch"><input type="checkbox" id="retry-mutate"><span>change the amount on retry</span></label>
-          <button class="button primary" id="retry-run" type="button">Send payment</button>
-        </div>
-        <ol class="sequence" id="retry-seq" aria-live="polite"></ol>
-        <div class="verdict" id="retry-verdict" role="status"></div>
-      </article>
+        <div class="lab-stack">
+          <!-- ------------------------------------------------ lab 01 -->
+          <article class="lab reveal" id="lab-race" data-lab="race" aria-labelledby="race-title">
+            <header class="lab-head">
+              <span class="lab-index" aria-hidden="true">01</span>
+              <div class="lab-titles">
+                <p class="lab-kicker">Concurrency <span class="sep">/</span> <a href="https://github.com/devnishantt/bank-management-system">bank-management-system<svg class="i i-xs"><use href="#i-ext"/></svg></a></p>
+                <h3 id="race-title">Withdraw the same money twice</h3>
+                <code class="assert"><span class="kw">assert</span> cash_dispensed &lt;= opening_balance</code>
+              </div>
+              <span class="lab-state" data-state="untested">untested</span>
+            </header>
+            <div class="lab-body">
+              <div class="lab-controls">
+                <p class="lab-brief">Two ATMs withdraw 60 from an account holding 100 at the same instant. The database interleaves their statements however it likes.</p>
+                <fieldset class="modes" id="race-mode">
+                  <legend class="control-label">How the withdrawal is written</legend>
+                  <label class="mode"><input type="radio" name="race-mode" value="naive" checked><span class="mode-card"><span class="tag tag-bad">unsafe</span><b>Read, then write</b><small>SELECT the balance, check it, UPDATE with the value you read</small></span></label>
+                  <label class="mode"><input type="radio" name="race-mode" value="locked"><span class="mode-card"><span class="tag tag-good">safe</span><b>SELECT &hellip; FOR UPDATE</b><small>Lock the row, so the second reader waits for the commit</small></span></label>
+                  <label class="mode"><input type="radio" name="race-mode" value="conditional"><span class="mode-card"><span class="tag tag-good">safe</span><b>Conditional UPDATE</b><small>Check and write in one atomic statement</small></span></label>
+                </fieldset>
+                <div class="btn-row">
+                  <button class="btn btn-light" id="race-run" type="button"><svg class="i"><use href="#i-play"/></svg>Race once</button>
+                  <button class="btn btn-ghost" id="race-many" type="button">Race 1,000 times</button>
+                </div>
+                <code class="sql" id="race-sql"></code>
+              </div>
+              <div class="lab-output">
+                <div class="output-head"><span class="output-title">timeline</span><span class="output-meta" id="race-meta">idle</span></div>
+                <div class="race-board" id="race-board" aria-live="polite">
+                  <div class="empty-state"><span class="empty-glyph" aria-hidden="true">T1 &#8644; T2</span><p>Race once to see how the two transactions interleave, step by step.</p></div>
+                </div>
+                <div class="verdict" id="race-verdict" role="status"></div>
+              </div>
+            </div>
+          </article>
 
-      <!-- Lab 03: money -->
-      <article class="lab" id="lab-money" aria-labelledby="money-title">
-        <header class="lab-head">
-          <span class="lab-num">03</span>
-          <div>
-            <h3 id="money-title">Make a cent disappear</h3>
-            <p class="invariant"><span>invariant</span> the parts of a split always add up to the whole</p>
-          </div>
-          <a class="lab-source" href="https://github.com/devnishantt/ledgerline">ledgerline</a>
-        </header>
-        <p class="lab-brief">Split a bill, then add the shares back up. Left: <code>number</code>, the way most code stores money. Right: integer minor units.</p>
-        <div class="controls">
-          <label class="field">total <input type="text" id="money-total" value="100.00" inputmode="decimal" autocomplete="off" spellcheck="false"></label>
-          <label class="field">ways <input type="number" id="money-ways" value="3" min="1" max="12"></label>
-          <label class="field wide">or add these <input type="text" id="money-sum" value="0.10, 0.20" autocomplete="off" spellcheck="false"></label>
-        </div>
-        <div class="money-compare" id="money-out" aria-live="polite"></div>
-        <div class="verdict" id="money-verdict" role="status"></div>
-      </article>
+          <!-- ------------------------------------------------ lab 02 -->
+          <article class="lab reveal" id="lab-retry" data-lab="retry" aria-labelledby="retry-title">
+            <header class="lab-head">
+              <span class="lab-index" aria-hidden="true">02</span>
+              <div class="lab-titles">
+                <p class="lab-kicker">Idempotency <span class="sep">/</span> <a href="https://github.com/devnishantt/bank-management-system">bank-management-system<svg class="i i-xs"><use href="#i-ext"/></svg></a></p>
+                <h3 id="retry-title">Get charged three times for one payment</h3>
+                <code class="assert"><span class="kw">assert</span> charges(payment_intent) &lt;= 1</code>
+              </div>
+              <span class="lab-state" data-state="untested">untested</span>
+            </header>
+            <div class="lab-body">
+              <div class="lab-controls">
+                <p class="lab-brief">The server charges the card, then the response is lost on the way back. The client times out and retries, exactly as a well-behaved client should.</p>
+                <div class="control-label">Request</div>
+                <label class="toggle-card"><input type="checkbox" id="retry-key" checked><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Send an <code>Idempotency-Key</code></b><small>The server stores the first response under the key and replays it</small></span></label>
+                <label class="toggle-card"><input type="checkbox" id="retry-mutate"><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Change the amount on retry</b><small>Reuse the same key with a different body</small></span></label>
+                <label class="slider-card"><span class="slider-top"><b>Responses lost in transit</b><output id="retry-lost-out">2</output></span><input type="range" id="retry-lost" min="0" max="3" value="2"></label>
+                <div class="btn-row">
+                  <button class="btn btn-light" id="retry-run" type="button"><svg class="i"><use href="#i-play"/></svg>Send payment</button>
+                </div>
+              </div>
+              <div class="lab-output">
+                <div class="output-head"><span class="output-title">sequence</span><span class="output-meta" id="retry-meta">idle</span></div>
+                <div class="seq" id="retry-seq" aria-live="polite">
+                  <div class="empty-state"><span class="empty-glyph" aria-hidden="true">client &rarr; server</span><p>Send a payment and watch the retries play out.</p></div>
+                </div>
+                <div class="statement" id="retry-charges"></div>
+                <div class="verdict" id="retry-verdict" role="status"></div>
+              </div>
+            </div>
+          </article>
 
-      <!-- Lab 04: chain -->
-      <article class="lab" id="lab-chain" aria-labelledby="chain-title">
-        <header class="lab-head">
-          <span class="lab-num">04</span>
-          <div>
-            <h3 id="chain-title">Rewrite history without getting caught</h3>
-            <p class="invariant"><span>invariant</span> any change to the audit log is detectable</p>
-          </div>
-          <a class="lab-source" href="https://github.com/devnishantt/ledgerline">ledgerline · aftermark</a>
-        </header>
-        <p class="lab-brief">Every entry stores the SHA-256 of the one before it. Edit an amount, delete the last rows, or re-hash the whole chain like an attacker with database access would.</p>
-        <div class="controls">
-          <div class="button-row">
-            <button class="button" id="chain-drop" type="button">Delete the last row</button>
-            <button class="button" id="chain-forge" type="button">Re-hash everything</button>
-            <button class="button ghost" id="chain-reset" type="button">Reset</button>
-          </div>
-          <label class="switch"><input type="checkbox" id="chain-checkpoint" checked><span>verify against a published checkpoint</span></label>
-        </div>
-        <div class="table-wrap"><table class="ledger" id="chain-table"><caption class="sr-only">Hash-linked audit log</caption>
-          <thead><tr><th scope="col">#</th><th scope="col">time</th><th scope="col">memo</th><th scope="col">amount</th><th scope="col">prev</th><th scope="col">hash</th></tr></thead>
-          <tbody></tbody></table></div>
-        <p class="checkpoint" id="chain-cp"></p>
-        <div class="verdict" id="chain-verdict" role="status"></div>
-      </article>
+          <!-- ------------------------------------------------ lab 03 -->
+          <article class="lab reveal" id="lab-money" data-lab="money" aria-labelledby="money-title">
+            <header class="lab-head">
+              <span class="lab-index" aria-hidden="true">03</span>
+              <div class="lab-titles">
+                <p class="lab-kicker">Money <span class="sep">/</span> <a href="https://github.com/devnishantt/ledgerline">ledgerline<svg class="i i-xs"><use href="#i-ext"/></svg></a></p>
+                <h3 id="money-title">Make a cent disappear</h3>
+                <code class="assert"><span class="kw">assert</span> sum(shares) == total</code>
+              </div>
+              <span class="lab-state" data-state="untested">untested</span>
+            </header>
+            <div class="lab-body">
+              <div class="lab-controls">
+                <p class="lab-brief">Split a bill, then add the shares back up. One side stores money as a JavaScript <code>number</code>, the way most code does. The other uses integer minor units.</p>
+                <div class="control-label">Try one</div>
+                <div class="presets" id="money-presets">
+                  <button type="button" class="preset" data-total="100.00" data-ways="3" data-sum="0.10, 0.20">100.00 &divide; 3</button>
+                  <button type="button" class="preset" data-total="9.99" data-ways="7" data-sum="0.10, 0.20, 0.30">9.99 &divide; 7</button>
+                  <button type="button" class="preset" data-total="50.00" data-ways="2" data-sum="1.10, 2.20">50.00 &divide; 2</button>
+                  <button type="button" class="preset" data-total="1.005" data-ways="2" data-sum="0.10">1.005 &divide; 2</button>
+                </div>
+                <div class="control-label">Or type your own</div>
+                <div class="fields">
+                  <label class="field"><span>total</span><input type="text" id="money-total" value="100.00" inputmode="decimal" autocomplete="off" spellcheck="false"></label>
+                  <label class="field field-narrow"><span>ways</span><input type="number" id="money-ways" value="3" min="1" max="12"></label>
+                  <label class="field field-wide"><span>add these</span><input type="text" id="money-sum" value="0.10, 0.20" autocomplete="off" spellcheck="false"></label>
+                </div>
+              </div>
+              <div class="lab-output">
+                <div class="output-head"><span class="output-title">comparison</span><span class="output-meta" id="money-meta">live</span></div>
+                <div class="money-compare" id="money-out" aria-live="polite"></div>
+                <div class="verdict" id="money-verdict" role="status"></div>
+              </div>
+            </div>
+          </article>
 
-      <!-- Lab 05: approvals -->
-      <article class="lab" id="lab-approve" aria-labelledby="approve-title">
-        <header class="lab-head">
-          <span class="lab-num">05</span>
-          <div>
-            <h3 id="approve-title">Close an incident on your own</h3>
-            <p class="invariant"><span>invariant</span> resolution needs two people, other than the author, approving the current evidence</p>
-          </div>
-          <a class="lab-source" href="https://github.com/devnishantt/aftermark">aftermark</a>
-        </header>
-        <p class="lab-brief">Alice opened <b>INC-1042</b>. You can act as anyone. Try to get it resolved without two genuine sign-offs: self-approve, or add evidence after people approved.</p>
-        <div class="controls">
-          <label class="switch"><input type="checkbox" id="approve-enforce"><span>enforce the rules server-side</span></label>
-          <fieldset class="segmented" id="approve-actor">
-            <legend>Act as</legend>
-            <label><input type="radio" name="actor" value="alice" checked><span>alice <small>author</small></span></label>
-            <label><input type="radio" name="actor" value="bob"><span>bob</span></label>
-            <label><input type="radio" name="actor" value="carol"><span>carol</span></label>
-            <label><input type="radio" name="actor" value="mallory"><span>mallory</span></label>
-          </fieldset>
+          <!-- ------------------------------------------------ lab 04 -->
+          <article class="lab reveal" id="lab-chain" data-lab="chain" aria-labelledby="chain-title">
+            <header class="lab-head">
+              <span class="lab-index" aria-hidden="true">04</span>
+              <div class="lab-titles">
+                <p class="lab-kicker">Audit trails <span class="sep">/</span> <a href="https://github.com/devnishantt/ledgerline">ledgerline</a>, <a href="https://github.com/devnishantt/aftermark">aftermark<svg class="i i-xs"><use href="#i-ext"/></svg></a></p>
+                <h3 id="chain-title">Rewrite history without getting caught</h3>
+                <code class="assert"><span class="kw">assert</span> verify(log) detects any change</code>
+              </div>
+              <span class="lab-state" data-state="untested">untested</span>
+            </header>
+            <div class="lab-body">
+              <div class="lab-controls">
+                <p class="lab-brief">Every entry stores the SHA-256 of the one before it. Edit an amount in the log, delete the newest rows, or re-hash the whole chain the way an attacker with database access would.</p>
+                <div class="control-label">Attacks</div>
+                <div class="btn-col">
+                  <p class="hint">Edit any amount directly in the log.</p>
+                  <button class="btn btn-ghost" id="chain-drop" type="button">Delete the newest row</button>
+                  <button class="btn btn-ghost" id="chain-forge" type="button">Re-hash the entire chain</button>
+                  <button class="btn btn-quiet" id="chain-reset" type="button"><svg class="i"><use href="#i-reset"/></svg>Restore the original log</button>
+                </div>
+                <div class="control-label">Defence</div>
+                <label class="toggle-card"><input type="checkbox" id="chain-checkpoint" checked><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Verify against a published checkpoint</b><small>The head hash is stored somewhere the database cannot write</small></span></label>
+              </div>
+              <div class="lab-output">
+                <div class="output-head"><span class="output-title">audit log</span><span class="output-meta" id="chain-meta">sha-256</span></div>
+                <ol class="chain" id="chain-list" aria-label="Hash-linked audit log"></ol>
+                <div class="checkpoint" id="chain-cp"></div>
+                <div class="verdict" id="chain-verdict" role="status"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ------------------------------------------------ lab 05 -->
+          <article class="lab reveal" id="lab-approve" data-lab="approve" aria-labelledby="approve-title">
+            <header class="lab-head">
+              <span class="lab-index" aria-hidden="true">05</span>
+              <div class="lab-titles">
+                <p class="lab-kicker">Authorization <span class="sep">/</span> <a href="https://github.com/devnishantt/aftermark">aftermark<svg class="i i-xs"><use href="#i-ext"/></svg></a></p>
+                <h3 id="approve-title">Close an incident on your own</h3>
+                <code class="assert"><span class="kw">assert</span> len(approvers(manifest) - {author}) &gt;= 2</code>
+              </div>
+              <span class="lab-state" data-state="untested">untested</span>
+            </header>
+            <div class="lab-body">
+              <div class="lab-controls">
+                <p class="lab-brief">Alice opened <b>INC-1042</b>. You can act as anyone. Get it resolved without two genuine sign-offs: approve your own incident, or slip in evidence after the others approved.</p>
+                <label class="toggle-card"><input type="checkbox" id="approve-enforce"><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Enforce the rules on the server</b><small>Off: &ldquo;resolved&rdquo; is just a status field the UI guards</small></span></label>
+                <fieldset class="actors" id="approve-actor">
+                  <legend class="control-label">Act as</legend>
+                  <label class="actor"><input type="radio" name="actor" value="alice" checked><span class="actor-card"><span class="avatar av-a">A</span><b>alice</b><small>author</small></span></label>
+                  <label class="actor"><input type="radio" name="actor" value="bob"><span class="actor-card"><span class="avatar av-b">B</span><b>bob</b><small>on call</small></span></label>
+                  <label class="actor"><input type="radio" name="actor" value="carol"><span class="actor-card"><span class="avatar av-c">C</span><b>carol</b><small>SRE lead</small></span></label>
+                  <label class="actor"><input type="radio" name="actor" value="mallory"><span class="actor-card"><span class="avatar av-m">M</span><b>mallory</b><small>insider</small></span></label>
+                </fieldset>
+                <div class="control-label">Do</div>
+                <div class="action-grid" id="approve-actions">
+                  <button class="btn btn-ghost btn-small" type="button" data-action="investigate">investigate</button>
+                  <button class="btn btn-ghost btn-small" type="button" data-action="evidence">attach evidence</button>
+                  <button class="btn btn-ghost btn-small" type="button" data-action="contain">contain</button>
+                  <button class="btn btn-ghost btn-small" type="button" data-action="approve">approve</button>
+                  <button class="btn btn-light btn-small" type="button" data-action="resolve">resolve</button>
+                  <button class="btn btn-quiet btn-small" type="button" data-action="reset"><svg class="i"><use href="#i-reset"/></svg>reset</button>
+                </div>
+              </div>
+              <div class="lab-output">
+                <div class="output-head"><span class="output-title">incident</span><span class="output-meta" id="approve-meta">INC-1042</span></div>
+                <div class="incident" id="approve-state" aria-live="polite"></div>
+                <ol class="responses" id="approve-log" aria-label="Server responses"></ol>
+                <div class="verdict" id="approve-verdict" role="status"></div>
+              </div>
+            </div>
+          </article>
         </div>
-        <div class="button-row actions" id="approve-actions">
-          <button class="button" type="button" data-action="investigate">investigate</button>
-          <button class="button" type="button" data-action="evidence">attach evidence</button>
-          <button class="button" type="button" data-action="contain">contain</button>
-          <button class="button" type="button" data-action="approve">approve</button>
-          <button class="button primary" type="button" data-action="resolve">resolve</button>
-          <button class="button ghost" type="button" data-action="reset">reset</button>
-        </div>
-        <div class="incident" id="approve-state" aria-live="polite"></div>
-        <ol class="responses" id="approve-log"></ol>
-        <div class="verdict" id="approve-verdict" role="status"></div>
-      </article>
+      </div>
     </section>
 
+    <!-- ================================================================ status -->
     <section id="status" aria-labelledby="status-title">
-      <header class="section-head">
-        <span class="section-code">0x02</span>
+      <header class="section-head reveal">
+        <p class="section-kicker">live</p>
         <h2 id="status-title">Status page</h2>
-        <p>Recent main-branch CI runs for every featured repository, pulled from the GitHub Actions API each time this site deploys and once a day.</p>
+        <p class="section-lede">Recent main-branch CI runs for every featured repository, read from the GitHub Actions API on every deploy and once a day. If something is red, this page says so.</p>
       </header>
-      <div class="status-summary" id="status-summary"></div>
-      <ul class="status-list" id="status-list"></ul>
-      <p class="fineprint" id="status-updated"></p>
+      <div class="status-wrap reveal">
+        <div class="status-summary" id="status-summary"></div>
+        <ul class="status-list" id="status-list"></ul>
+        <p class="fineprint" id="status-updated"></p>
+      </div>
     </section>
 
+    <!-- ================================================================ work -->
     <section id="work" aria-labelledby="work-title">
-      <header class="section-head">
-        <span class="section-code">0x03</span>
-        <h2 id="work-title">What these labs come from</h2>
-        <p>Each lab is a simplified version of a guarantee one of these projects actually makes.</p>
+      <header class="section-head reveal">
+        <p class="section-kicker">source</p>
+        <h2 id="work-title">Where the labs come from</h2>
+        <p class="section-lede">Each lab is a simplified version of a guarantee one of these projects actually makes.</p>
       </header>
       <div class="work-grid" id="work-grid"></div>
     </section>
 
+    <!-- ================================================================ contact -->
     <section id="contact" aria-labelledby="contact-title">
-      <header class="section-head">
-        <span class="section-code">0x04</span>
-        <h2 id="contact-title">Talk to me</h2>
-      </header>
-      <p class="contact-copy">If you are hiring for backend work where correctness matters, or you found a way to break one of the safe modes, I want to hear about it.</p>
-      <div class="hero-actions">
-        <a class="button primary" href="https://github.com/devnishantt">github.com/devnishantt</a>
-        <a class="button" id="contact-api" href="https://github.com/devnishantt/devnishantt/issues/new?title=GET%20/about">Call my profile API: <code>GET /about</code></a>
+      <div class="contact-card reveal">
+        <div class="contact-glow" aria-hidden="true"></div>
+        <p class="section-kicker">contact</p>
+        <h2 id="contact-title">Hiring for backend work where correctness matters?</h2>
+        <p class="contact-copy">Or you found a way to break one of the safe modes. Either way, I want to hear about it.</p>
+        <div class="email-block">
+          <a class="email-link" id="contact-email" href="mailto:nishanttgithub@gmail.com?subject=Hello%20Nishant">nishanttgithub@gmail.com</a>
+          <button class="btn btn-ghost" id="copy-email" type="button" data-email="nishanttgithub@gmail.com"><svg class="i"><use href="#i-copy"/></svg><span>Copy</span></button>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-light btn-lg" href="mailto:nishanttgithub@gmail.com?subject=Hello%20Nishant"><svg class="i"><use href="#i-mail"/></svg>Email me</a>
+          <a class="btn btn-ghost btn-lg" href="https://github.com/devnishantt"><svg class="i"><use href="#i-github"/></svg>github.com/devnishantt</a>
+          <a class="btn btn-ghost btn-lg" id="contact-api" href="https://github.com/devnishantt/devnishantt/issues/new?title=GET%20/about">Call my profile API: <code>GET /about</code></a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer id="site-footer">
-    <p>No framework, no tracking, no build step. Hand-written HTML, CSS and ES modules; the lab logic is tested with <code>node --test</code>.
-      <a href="https://github.com/devnishantt/devnishantt.github.io">Source</a>.</p>
+    <div class="footer-inner">
+      <p class="footer-brand"><span class="brand-mark" aria-hidden="true">N</span>Nishant &middot; backend engineer</p>
+      <p class="footer-links">
+        <a href="mailto:nishanttgithub@gmail.com">nishanttgithub@gmail.com</a>
+        <a href="https://github.com/devnishantt">GitHub</a>
+        <a href="https://github.com/devnishantt/devnishantt.github.io">Source</a>
+        <a href="#top">Back to top</a>
+      </p>
+      <p class="footer-note">Hand-written HTML, CSS and ES modules. No framework, no tracking. Lab logic tested with <code>node --test</code>, every lab driven in Chromium on each push.</p>
+    </div>
   </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
