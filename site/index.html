@@ -66,7 +66,7 @@
           <span class="h1-line">Try to <span class="crack"><span class="sr-only">break</span><span class="crack-a" aria-hidden="true">break</span><span class="crack-b" aria-hidden="true">break</span></span></span>
           <span class="h1-line h1-dim">my backends.</span>
         </h1>
-        <p class="lede reveal">Most portfolios ask you to trust a list of skills. This one hands you five invariants my systems enforce and the tools to attack them. Every lab runs the unsafe code first, so you can watch it fail, then the code I actually ship.</p>
+        <p class="lede reveal">Most portfolios ask you to trust a list of skills. This one hands you five invariants my systems enforce and the tools to attack them. Each lab has a common bug built in on purpose, sitting next to the code I actually ship. Break the bug, then switch to my code and watch it hold.</p>
         <div class="cta-row reveal">
           <a class="btn btn-light btn-lg" href="#lab-race">Start breaking things<svg class="i"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-ghost btn-lg" href="mailto:nishanttgithub@gmail.com"><svg class="i"><use href="#i-mail"/></svg>nishanttgithub@gmail.com</a>
@@ -86,8 +86,8 @@
         </div>
         <ol class="monitor-rows" id="monitor-rows"></ol>
         <div class="monitor-foot" id="scoreboard">
-          <div class="score"><span class="score-value broken" id="score-broken">0</span><span class="score-label">broken</span></div>
-          <div class="score"><span class="score-value held" id="score-held">0</span><span class="score-label">held</span></div>
+          <div class="score"><span class="score-value broken" id="score-broken">0</span><span class="score-label">bugs found</span></div>
+          <div class="score"><span class="score-value held" id="score-held">0</span><span class="score-label">fixes verified</span></div>
           <div class="score"><span class="score-value" id="score-labs">0/5</span><span class="score-label">labs tried</span></div>
           <button class="icon-btn" id="score-reset" type="button" aria-label="Reset your score" title="Reset your score"><svg class="i"><use href="#i-reset"/></svg></button>
         </div>
@@ -99,8 +99,19 @@
       <header class="section-head reveal">
         <p class="section-kicker">01 &mdash; 05</p>
         <h2 id="labs-title">The labs</h2>
-        <p class="section-lede">Five failure modes that have cost real companies real money. Pick the unsafe mode, break it, then switch to what I ship and try again.</p>
+        <p class="section-lede">Five bugs that have cost real companies real money. Every lab contains two versions of the same code: a <b>common bug</b> and <b>my code</b>.</p>
       </header>
+      <div class="guide reveal" id="lab-guide">
+        <div class="guide-note">
+          <svg class="i" aria-hidden="true"><use href="#i-info"/></svg>
+          <p><b>Seeing &ldquo;bug reproduced&rdquo; is the point, not a failure.</b> Each lab starts on the common bug so you can watch it break. My code is the other option, and it should never break. If you make it break, email me.</p>
+        </div>
+        <ol class="guide-steps">
+          <li><span class="step-n">1</span><span><b>Run the common bug</b><small>Pick the option tagged <span class="tag tag-bad">common bug</span> and run it. It breaks.</small></span></li>
+          <li><span class="step-n">2</span><span><b>Switch to my code</b><small>Pick the option tagged <span class="tag tag-good">my code</span>, the way my projects do it.</small></span></li>
+          <li><span class="step-n">3</span><span><b>Try to break it again</b><small>Same attack, same inputs. It holds every time.</small></span></li>
+        </ol>
+      </div>
 
       <div class="labs-layout">
         <nav class="lab-rail" aria-label="Labs">
@@ -122,16 +133,17 @@
             </header>
             <div class="lab-body">
               <div class="lab-controls">
-                <p class="lab-brief">Two ATMs withdraw 60 from an account holding 100 at the same instant. The database interleaves their statements however it likes.</p>
+                <p class="lab-brief">Two ATMs withdraw 60 from an account holding 100 at the same instant. Correct result: one succeeds, one is refused. The database interleaves their statements however it likes.</p>
+                <ol class="lab-steps"><li>Race with <b>Read, then write</b>. Usually 120 comes out of a 100 account.</li><li>Pick either <b>my code</b> option and race again. Never more than 100.</li></ol>
                 <fieldset class="modes" id="race-mode">
                   <legend class="control-label">How the withdrawal is written</legend>
-                  <label class="mode"><input type="radio" name="race-mode" value="naive" checked><span class="mode-card"><span class="tag tag-bad">unsafe</span><b>Read, then write</b><small>SELECT the balance, check it, UPDATE with the value you read</small></span></label>
-                  <label class="mode"><input type="radio" name="race-mode" value="locked"><span class="mode-card"><span class="tag tag-good">safe</span><b>SELECT &hellip; FOR UPDATE</b><small>Lock the row, so the second reader waits for the commit</small></span></label>
-                  <label class="mode"><input type="radio" name="race-mode" value="conditional"><span class="mode-card"><span class="tag tag-good">safe</span><b>Conditional UPDATE</b><small>Check and write in one atomic statement</small></span></label>
+                  <label class="mode"><input type="radio" name="race-mode" value="naive" checked><span class="mode-card"><span class="tag tag-bad">common bug</span><b>Read, then write</b><small>SELECT the balance, check it, UPDATE with the value you read</small></span></label>
+                  <label class="mode"><input type="radio" name="race-mode" value="locked"><span class="mode-card"><span class="tag tag-good">my code</span><b>SELECT &hellip; FOR UPDATE</b><small>Lock the row, so the second reader waits for the commit</small></span></label>
+                  <label class="mode"><input type="radio" name="race-mode" value="conditional"><span class="mode-card"><span class="tag tag-good">my code</span><b>Conditional UPDATE</b><small>Check and write in one atomic statement</small></span></label>
                 </fieldset>
                 <div class="btn-row">
                   <button class="btn btn-light" id="race-run" type="button"><svg class="i"><use href="#i-play"/></svg>Race once</button>
-                  <button class="btn btn-ghost" id="race-many" type="button">Race 1,000 times</button>
+                  <button class="btn btn-ghost" id="race-many" type="button">Compare 1,000 races</button>
                 </div>
                 <code class="sql" id="race-sql"></code>
               </div>
@@ -158,9 +170,10 @@
             </header>
             <div class="lab-body">
               <div class="lab-controls">
-                <p class="lab-brief">The server charges the card, then the response is lost on the way back. The client times out and retries, exactly as a well-behaved client should.</p>
+                <p class="lab-brief">The server charges the card, then the response is lost on the way back. The client times out and retries, exactly as a well-behaved client should. Correct result: one charge.</p>
+                <ol class="lab-steps"><li>Turn the key <b>off</b> (common bug) and send. You get charged three times.</li><li>Turn it back <b>on</b> (my code) and send. One charge.</li></ol>
                 <div class="control-label">Request</div>
-                <label class="toggle-card"><input type="checkbox" id="retry-key" checked><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Send an <code>Idempotency-Key</code></b><small>The server stores the first response under the key and replays it</small></span></label>
+                <label class="toggle-card"><input type="checkbox" id="retry-key" checked><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Send an <code>Idempotency-Key</code> <span class="tag tag-good">my code</span></b><small>Off is the common bug: every retry looks like a new payment</small></span></label>
                 <label class="toggle-card"><input type="checkbox" id="retry-mutate"><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Change the amount on retry</b><small>Reuse the same key with a different body</small></span></label>
                 <label class="slider-card"><span class="slider-top"><b>Responses lost in transit</b><output id="retry-lost-out">2</output></span><input type="range" id="retry-lost" min="0" max="3" value="2"></label>
                 <div class="btn-row">
@@ -191,7 +204,8 @@
             </header>
             <div class="lab-body">
               <div class="lab-controls">
-                <p class="lab-brief">Split a bill, then add the shares back up. One side stores money as a JavaScript <code>number</code>, the way most code does. The other uses integer minor units.</p>
+                <p class="lab-brief">Split a bill, then add the shares back up. The left column stores money as a JavaScript <code>number</code>, the common bug. The right column is my code: whole cents as integers. Correct result: the shares always add up to the total.</p>
+                <ol class="lab-steps"><li>Pick an example. The common bug column loses or invents a cent.</li><li>My code column always adds up exactly, and refuses amounts like 1.005 instead of rounding them.</li></ol>
                 <div class="control-label">Try one</div>
                 <div class="presets" id="money-presets">
                   <button type="button" class="preset" data-total="100.00" data-ways="3" data-sum="0.10, 0.20">100.00 &divide; 3</button>
@@ -227,7 +241,8 @@
             </header>
             <div class="lab-body">
               <div class="lab-controls">
-                <p class="lab-brief">Every entry stores the SHA-256 of the one before it. Edit an amount in the log, delete the newest rows, or re-hash the whole chain the way an attacker with database access would.</p>
+                <p class="lab-brief">Every entry stores the SHA-256 of the one before it. You are an attacker with database access: edit an amount, delete the newest row, or re-hash the whole chain. Correct result: every change is detected.</p>
+                <ol class="lab-steps"><li>Turn the checkpoint <b>off</b> (common bug), delete the newest row. Verification still says OK.</li><li>Turn it back <b>on</b> (my code). The same tampering is caught.</li></ol>
                 <div class="control-label">Attacks</div>
                 <div class="btn-col">
                   <p class="hint">Edit any amount directly in the log.</p>
@@ -236,7 +251,7 @@
                   <button class="btn btn-quiet" id="chain-reset" type="button"><svg class="i"><use href="#i-reset"/></svg>Restore the original log</button>
                 </div>
                 <div class="control-label">Defence</div>
-                <label class="toggle-card"><input type="checkbox" id="chain-checkpoint" checked><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Verify against a published checkpoint</b><small>The head hash is stored somewhere the database cannot write</small></span></label>
+                <label class="toggle-card"><input type="checkbox" id="chain-checkpoint" checked><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Verify against a published checkpoint <span class="tag tag-good">my code</span></b><small>Off is the common bug: a truncated or re-hashed log still verifies</small></span></label>
               </div>
               <div class="lab-output">
                 <div class="output-head"><span class="output-title">audit log</span><span class="output-meta" id="chain-meta">sha-256</span></div>
@@ -260,8 +275,9 @@
             </header>
             <div class="lab-body">
               <div class="lab-controls">
-                <p class="lab-brief">Alice opened <b>INC-1042</b>. You can act as anyone. Get it resolved without two genuine sign-offs: approve your own incident, or slip in evidence after the others approved.</p>
-                <label class="toggle-card"><input type="checkbox" id="approve-enforce"><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Enforce the rules on the server</b><small>Off: &ldquo;resolved&rdquo; is just a status field the UI guards</small></span></label>
+                <p class="lab-brief">Alice opened <b>INC-1042</b>. The rule: two people other than Alice must approve the current evidence before it can be resolved. You can act as anyone.</p>
+                <ol class="lab-steps"><li>With enforcement <b>off</b> (common bug), as alice: investigate, attach evidence, contain, approve, resolve. She closes it alone.</li><li>Turn enforcement <b>on</b> (my code) and try the same. The server refuses.</li></ol>
+                <label class="toggle-card"><input type="checkbox" id="approve-enforce"><span class="toggle-ui" aria-hidden="true"></span><span class="toggle-text"><b>Enforce the rules on the server <span class="tag tag-good">my code</span></b><small>Off is the common bug: &ldquo;resolved&rdquo; is just a status field the UI guards</small></span></label>
                 <fieldset class="actors" id="approve-actor">
                   <legend class="control-label">Act as</legend>
                   <label class="actor"><input type="radio" name="actor" value="alice" checked><span class="actor-card"><span class="avatar av-a">A</span><b>alice</b><small>author</small></span></label>
@@ -321,7 +337,7 @@
         <div class="contact-glow" aria-hidden="true"></div>
         <p class="section-kicker">contact</p>
         <h2 id="contact-title">Hiring for backend work where correctness matters?</h2>
-        <p class="contact-copy">Or you found a way to break one of the safe modes. Either way, I want to hear about it.</p>
+        <p class="contact-copy">Or you found a way to break my code in one of the labs. Either way, I want to hear about it.</p>
         <div class="email-block">
           <a class="email-link" id="contact-email" href="mailto:nishanttgithub@gmail.com?subject=Hello%20Nishant">nishanttgithub@gmail.com</a>
           <button class="btn btn-ghost" id="copy-email" type="button" data-email="nishanttgithub@gmail.com"><svg class="i"><use href="#i-copy"/></svg><span>Copy</span></button>

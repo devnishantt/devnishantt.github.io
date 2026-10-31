@@ -30,40 +30,40 @@ await page.screenshot({ path: `${SHOTS}/01-hero.png` });
 // Lab 01
 // A single naive race breaks about 75% of the time; click until it does, as a visitor would.
 let raced = "";
-for (let i = 0; i < 25 && raced !== "BROKEN"; i++) {
+for (let i = 0; i < 25 && raced !== "BUG REPRODUCED"; i++) {
   await page.click("#race-run");
   raced = await verdict("race");
-  assert.ok(["BROKEN", "NOTE"].includes(raced), `unexpected naive verdict ${raced}`);
+  assert.ok(["BUG REPRODUCED", "NOTE"].includes(raced), `unexpected naive verdict ${raced}`);
 }
-assert.equal(raced, "BROKEN");
+assert.equal(raced, "BUG REPRODUCED");
 await page.locator("#lab-race").screenshot({ path: `${SHOTS}/02-race-broken.png` });
 await page.check('input[name="race-mode"][value="conditional"]', { force: true });
 await page.click("#race-many");
-assert.equal(await verdict("race"), "HELD");
-assert.match(await page.textContent("#race-verdict"), /0 of 1000/);
+assert.equal(await verdict("race"), "MY CODE HELD");
+assert.match(await page.textContent("#race-verdict"), /My code: 0 of 1000/);
 await page.check('input[name="race-mode"][value="locked"]', { force: true });
 await page.click("#race-run");
-assert.equal(await verdict("race"), "HELD");
+assert.equal(await verdict("race"), "MY CODE HELD");
 step("race: naive breaks, conditional holds 1000/1000, locked holds");
 
 // Lab 02
 await page.uncheck("#retry-key", { force: true });
 await page.click("#retry-run");
-assert.equal(await verdict("retry"), "BROKEN");
+assert.equal(await verdict("retry"), "BUG REPRODUCED");
 assert.match(await page.textContent("#retry-verdict"), /3 charges/);
 await page.check("#retry-key", { force: true });
 await page.click("#retry-run");
-assert.equal(await verdict("retry"), "HELD");
+assert.equal(await verdict("retry"), "MY CODE HELD");
 assert.match(await page.textContent("#retry-verdict"), /exactly one charge/);
 await page.locator("#lab-retry").screenshot({ path: `${SHOTS}/03-retry-held.png` });
 step("retry: no key triple-charges, key replays");
 
 // Lab 03
-assert.equal(await verdict("money"), "BROKEN");
+assert.equal(await verdict("money"), "BUG REPRODUCED");
 await page.fill("#money-total", "1.005");
-await page.waitForFunction(() => document.querySelector("#money-verdict .verdict-tag")?.textContent === "HELD");
+await page.waitForFunction(() => document.querySelector("#money-verdict .verdict-tag")?.textContent === "MY CODE HELD");
 await page.fill("#money-total", "100.00");
-await page.waitForFunction(() => document.querySelector("#money-verdict .verdict-tag")?.textContent === "BROKEN");
+await page.waitForFunction(() => document.querySelector("#money-verdict .verdict-tag")?.textContent === "BUG REPRODUCED");
 await page.locator("#lab-money").screenshot({ path: `${SHOTS}/04-money.png` });
 step("money: float split loses a cent, extra precision is rejected");
 
@@ -71,14 +71,14 @@ step("money: float split loses a cent, extra precision is rejected");
 const amount = page.locator('#chain-list input[data-i="2"]');
 await amount.fill("-3.00");
 await amount.dispatchEvent("change");
-assert.equal(await verdict("chain"), "HELD");
+assert.equal(await verdict("chain"), "MY CODE HELD");
 assert.match(await page.textContent("#chain-verdict"), /record 2/);
 await page.click("#chain-reset");
 await page.uncheck("#chain-checkpoint", { force: true });
 await page.click("#chain-drop");
-assert.equal(await verdict("chain"), "BROKEN");
+assert.equal(await verdict("chain"), "BUG REPRODUCED");
 await page.check("#chain-checkpoint", { force: true });
-assert.equal(await verdict("chain"), "HELD");
+assert.equal(await verdict("chain"), "MY CODE HELD");
 assert.match(await page.textContent("#chain-verdict"), /checkpoint says 6/);
 await page.click("#chain-reset");
 await page.click("#chain-forge");
@@ -91,10 +91,10 @@ const act = async (actor, action) => {
   await page.click(`#approve-actions button[data-action="${action}"]`);
 };
 for (const [a, x] of [["alice", "investigate"], ["alice", "evidence"], ["alice", "contain"], ["alice", "approve"], ["alice", "resolve"]]) await act(a, x);
-assert.equal(await verdict("approve"), "BROKEN");
+assert.equal(await verdict("approve"), "BUG REPRODUCED");
 await page.check("#approve-enforce", { force: true });
 for (const [a, x] of [["alice", "investigate"], ["alice", "evidence"], ["alice", "contain"], ["alice", "approve"]]) await act(a, x);
-assert.equal(await verdict("approve"), "HELD");
+assert.equal(await verdict("approve"), "MY CODE HELD");
 assert.match(await page.textContent("#approve-verdict"), /403/);
 for (const [a, x] of [["bob", "approve"], ["carol", "approve"], ["mallory", "evidence"], ["mallory", "resolve"]]) await act(a, x);
 assert.match(await page.textContent("#approve-verdict"), /412/);

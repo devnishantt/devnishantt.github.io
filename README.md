@@ -5,7 +5,7 @@
 **Live: https://devnishantt.github.io**
 
 A portfolio you attack instead of read. It hands you five invariants my backends enforce and the tools
-to break them. Each lab runs the unsafe version first so you can watch it fail, then the version I ship.
+to break them. Each lab contains two versions of the same code: a **common bug** (built in on purpose, so you can watch it break) and **my code** (what my projects actually do, which should never break). "Bug reproduced" in a lab means you found the planted bug, not that the project failed.
 
 | Lab | You try to | The invariant | Comes from |
 |---|---|---|---|
@@ -15,7 +15,7 @@ to break them. Each lab runs the unsafe version first so you can watch it fail, 
 | 04 | Rewrite history without getting caught | any change to the audit log is detectable | [ledgerline](https://github.com/devnishantt/ledgerline), [aftermark](https://github.com/devnishantt/aftermark) |
 | 05 | Close an incident on your own | resolution needs two non-authors approving the current evidence | [aftermark](https://github.com/devnishantt/aftermark) |
 
-Your score (invariants broken in unsafe modes, attacks that held against safe ones) is kept in `localStorage`.
+Your progress (bugs found in the common-bug versions, attacks my code survived) is kept in `localStorage`. "Compare 1,000 races" in lab 01 runs the bug and both fixes on the same 1,000 random timings side by side.
 There is also a status page with recent main-branch CI runs for each featured repository.
 
 ## How it works

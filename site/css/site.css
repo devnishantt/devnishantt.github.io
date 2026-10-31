@@ -841,3 +841,64 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
   .js .reveal { opacity: 1; transform: none; }
   .crack-b { display: none; }
 }
+
+/* ---------------------------------------------------------------- how the labs work */
+
+.guide {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 0; margin: -16px 0 40px;
+  border: 1px solid var(--line-2); border-radius: var(--r-lg); overflow: hidden;
+  background: linear-gradient(180deg, rgba(17, 19, 23, 0.85), rgba(10, 11, 13, 0.9));
+}
+.guide-note { display: flex; gap: 12px; align-items: flex-start; padding: 22px 24px; border-right: 1px solid var(--line); background: rgba(142, 168, 255, 0.05); }
+.guide-note .i { width: 20px; height: 20px; color: var(--accent); margin-top: 2px; }
+.guide-note p { margin: 0; color: var(--text-2); font-size: 14.5px; line-height: 1.6; }
+.guide-note b { color: var(--text); }
+.guide-steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.guide-steps li { display: flex; gap: 12px; align-items: flex-start; padding: 22px 20px; }
+.guide-steps li + li { border-left: 1px solid var(--line); }
+.step-n { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line-3); font: 600 12px var(--mono); color: var(--text); }
+.guide-steps b { display: block; font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em; }
+.guide-steps small { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.guide-steps .tag, .toggle-text .tag { display: inline-block; vertical-align: 1px; }
+.toggle-text b .tag { margin-left: 6px; }
+
+.lab-steps { margin: -4px 0 4px; padding: 12px 14px 12px 34px; border-radius: var(--r); background: rgba(255, 255, 255, 0.025); border: 1px solid var(--line); color: var(--text-2); font-size: 13.5px; line-height: 1.55; }
+.lab-steps li + li { margin-top: 6px; }
+.lab-steps li::marker { color: var(--faint); font-family: var(--mono); font-size: 12px; }
+.lab-steps b { color: var(--text); font-weight: 600; }
+
+/* ---------------------------------------------------------------- 1,000-race comparison */
+
+.compare { display: grid; gap: 8px; }
+.compare-row {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 14px; align-items: center;
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); background: #050607;
+  animation: rise 0.35s var(--ease) both;
+}
+.compare-row:nth-child(2) { animation-delay: 0.08s; }
+.compare-row:nth-child(3) { animation-delay: 0.16s; }
+.compare-row.picked { border-color: var(--line-3); box-shadow: 0 0 0 1px var(--line-3) inset; }
+.compare-row.bad.picked { border-color: var(--bad-line); box-shadow: 0 0 0 1px var(--bad-line) inset; }
+.compare-name { display: grid; gap: 4px; justify-items: start; min-width: 0; }
+.compare-name b { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+.compare-bar { height: 10px; border-radius: 999px; background: var(--good-bg); border: 1px solid var(--good-line); overflow: hidden; }
+.compare-row.bad .compare-bar { background: var(--bg-3); border-color: var(--line-2); }
+.compare-bar span { display: block; height: 100%; border-radius: 999px; transition: width 0.9s var(--ease); background: repeating-linear-gradient(-45deg, var(--bad) 0 6px, #e04848 6px 12px); }
+.compare-num { font: 12px var(--mono); color: var(--muted); white-space: nowrap; text-align: right; }
+.compare-num b { font-size: 16px; font-weight: 650; color: var(--text); }
+.compare-row.bad .compare-num b { color: var(--bad); }
+.compare-row.good .compare-num b { color: var(--good); }
+.compare-note { margin: 10px 0 0; font-size: 12.5px; color: var(--muted); }
+
+@media (max-width: 1080px) {
+  .guide { grid-template-columns: 1fr; }
+  .guide-note { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 640px) {
+  .guide { margin-top: -8px; }
+  .guide-steps { grid-template-columns: 1fr; }
+  .guide-steps li + li { border-left: 0; border-top: 1px solid var(--line); }
+  .guide-steps li, .guide-note { padding: 16px 18px; }
+  .compare-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .compare-bar { grid-column: 1 / -1; grid-row: 2; }
+}

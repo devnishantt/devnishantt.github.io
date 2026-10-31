@@ -19,7 +19,7 @@ const LAB_INFO = [
   { id: "approve", short: "Solo close", title: "Close an incident alone", inv: "approvers - {author} >= 2" },
 ];
 const LABS = LAB_INFO.map((l) => l.id);
-const STATE_LABEL = { untested: "untested", tried: "probing", broken: "broken", held: "held" };
+const STATE_LABEL = { untested: "not tried", tried: "probing", broken: "bug found", held: "my code held" };
 
 // ---------------------------------------------------------------- scoreboard
 
@@ -107,7 +107,7 @@ function startRun(lab) {
 }
 
 function verdict(target, kind, title, why) {
-  const tag = { bad: "BROKEN", good: "HELD", info: "NOTE" }[kind];
+  const tag = { bad: "BUG REPRODUCED", good: "MY CODE HELD", info: "NOTE" }[kind];
   $(target).innerHTML = `<div class="verdict-box ${kind}"><span class="verdict-tag">${tag}</span><p><b>${title}</b></p>${why ? `<p class="why">${why}</p>` : ""}</div>`;
 }
 
@@ -126,7 +126,7 @@ $("#score-reset").addEventListener("click", () => {
   saveScore();
   renderScore();
   $$(".lab").forEach((l) => l.classList.remove("is-broken", "is-held"));
-  toast("Score reset");
+  toast("Progress reset");
 });
 
 // ---------------------------------------------------------------- lab rail
@@ -173,8 +173,8 @@ function runRace() {
     if (!current()) return;
     if (r.broken) {
       meta("race", `seed ${raceSeed - 1} · invariant violated`, "bad");
-      verdict("#race-verdict", "bad", `The bank paid out ${r.paidOut} from an account that held ${r.initial}.`,
-        `Both transactions read the balance before either wrote it, so both saw ${r.initial} and both approved. The second write overwrote the first. That is a lost update, and ${r.missing} just left the building.`);
+      verdict("#race-verdict", "bad", `Bug reproduced: the bank paid out ${r.paidOut} from an account that held ${r.initial}.`,
+        `Both transactions read the balance before either wrote it, so both saw ${r.initial} and both approved. The second write overwrote the first. That is a lost update, and ${r.missing} just left the building. Now pick a my code option and race again.`);
       record("race", "broke");
     } else if (mode === "naive") {
       meta("race", `seed ${raceSeed - 1} · lucky schedule`);
@@ -195,33 +195,38 @@ function raceMany() {
   startRun("race");
   const mode = raceMode();
   const n = 1000;
-  const r = race.breakRate({ runs: n, firstSeed: raceSeed, mode });
+  // Same 1,000 random schedules for every mode, so the comparison is fair.
+  const rows = [
+    { key: "naive", name: "Read, then write", who: "common bug" },
+    { key: "locked", name: "SELECT … FOR UPDATE", who: "my code" },
+    { key: "conditional", name: "Conditional UPDATE", who: "my code" },
+  ].map((m) => ({ ...m, ...race.breakRate({ runs: n, firstSeed: raceSeed, mode: m.key }) }));
   raceSeed += n;
-  const pct = (r.rate * 100).toFixed(1);
+  const pick = rows.find((r) => r.key === mode);
   $("#race-board").innerHTML = `
-    <div class="histogram" role="img" aria-label="${r.broken} of ${n} runs broke the invariant">
-      <span class="h-bad" style="width:0%"></span><span class="h-good" style="width:100%"></span>
+    <div class="compare" role="table" aria-label="${n} races per version">
+      ${rows.map((r) => `
+        <div class="compare-row ${r.broken ? "bad" : "good"}${r.key === mode ? " picked" : ""}" role="row">
+          <div class="compare-name" role="cell"><span class="tag ${r.broken ? "tag-bad" : "tag-good"}">${r.who}</span><b>${r.name}</b></div>
+          <div class="compare-bar" role="cell"><span style="width:0%" data-w="${(r.rate * 100).toFixed(1)}"></span></div>
+          <div class="compare-num" role="cell"><b>${r.broken.toLocaleString()}</b> / ${n.toLocaleString()} broken</div>
+        </div>`).join("")}
     </div>
-    <div class="race-meter">
-      <div>schedules tried<b>${n.toLocaleString()}</b></div>
-      <div class="${r.broken ? "bad" : "good"}">money from nothing<b>${r.broken.toLocaleString()}</b></div>
-      <div class="${r.broken ? "bad" : "good"}">failure rate<b>${pct}%</b></div>
-    </div>`;
-  const bad = $("#race-board .h-bad");
-  const good = $("#race-board .h-good");
+    <p class="compare-note">Each version ran the same ${n.toLocaleString()} random timings. &ldquo;Broken&rdquo; means more cash came out than the account held.</p>`;
+  const bars = $$("#race-board .compare-bar span");
   requestAnimationFrame(() => requestAnimationFrame(() => {
-    if (!bad.isConnected) return; // board was replaced (mode switched) before the animation started
-    bad.style.width = `${pct}%`;
-    good.style.width = `${100 - pct}%`;
+    bars.forEach((b) => { if (b.isConnected) b.style.width = `${Math.max(Number(b.dataset.w), 0)}%`; });
   }));
-  if (r.broken) {
-    meta("race", `${n} schedules · ${pct}% broken`, "bad");
-    verdict("#race-verdict", "bad", `${r.broken} of ${n} schedules paid out more than the account held.`,
-      "Tests that run one request at a time will never see this. Production, with real concurrency, sees it on a busy day.");
+  const bug = rows[0];
+  if (pick.broken) {
+    meta("race", `bug: ${bug.broken}/${n} · my code: 0/${n}`, "bad");
+    verdict("#race-verdict", "bad", `The common bug paid out too much in ${pick.broken} of ${n} races. Both versions of my code: 0 of ${n}.`,
+      "That is expected: you were testing the bug on purpose. Tests that send one request at a time never see it; real traffic does. Pick a my code option to try to break the fix.");
     record("race", "broke");
   } else {
-    meta("race", `${n} schedules · 0 broken`, "good");
-    verdict("#race-verdict", "good", `0 of ${n} schedules broke conservation.`, "Every interleaving the scheduler could produce leaves money in equal to money out.");
+    meta("race", `my code: 0/${n} · bug: ${bug.broken}/${n}`, "good");
+    verdict("#race-verdict", "good", `My code: 0 of ${n} races broke. The common bug broke ${bug.broken} times on the same timings.`,
+      "Every interleaving the scheduler produced left money in equal to money out.");
     record("race", "held");
   }
 }
@@ -274,8 +279,8 @@ $("#retry-run").addEventListener("click", () => {
       <div class="total ${r.broken ? "bad" : "good"}"><span>charged</span><b>${esc(r.totalCharged)}</b></div>`;
     if (r.broken) {
       meta("retry", `${r.charges.length} charges for 1 payment`, "bad");
-      verdict("#retry-verdict", "bad", `One payment, ${r.charges.length} charges: the customer paid ${r.totalCharged} for a ${r.intended} order.`,
-        "The server cannot tell a retry from a new payment, so every timeout becomes another charge. The client did nothing wrong: retrying is correct behaviour.");
+      verdict("#retry-verdict", "bad", `Bug reproduced: one payment, ${r.charges.length} charges. The customer paid ${r.totalCharged} for a ${r.intended} order.`,
+        "The server cannot tell a retry from a new payment, so every timeout becomes another charge. Retrying is correct client behaviour; the server has to handle it. Turn the Idempotency-Key back on (my code) and send again.");
       record("retry", "broke");
     } else if (lostCount === 0) {
       meta("retry", "delivered first time");
@@ -323,7 +328,7 @@ function renderMoney() {
       meta("money", "float drifted", "bad");
       const lost = !c.float.exact ? `The float shares add up to ${c.float.sumText}, not ${c.total}.` : `${sumInputs.join(" + ")} is ${s.floatText} as a float.`;
       verdict("#money-verdict", "bad", esc(lost),
-        "Binary floating point cannot represent most decimal fractions, and rounding each share independently drops or invents cents. Integers plus a largest-remainder split always sum to the total.");
+        "That is the common bug column: binary floating point cannot represent most decimal fractions. My code column, whole cents as integers, adds up exactly every time.");
       return "broke";
     }
     meta("money", "both agree");
@@ -401,8 +406,8 @@ async function renderChain(score = true, flashSeq = null) {
   }
   if (v.ok) {
     meta("chain", "tampered · verify OK", "bad");
-    verdict("#chain-verdict", "bad", "You rewrote history and verification still says OK.",
-      "Without an external checkpoint, a chain that was truncated or fully re-hashed is internally consistent. Turn the checkpoint back on and look again.");
+    verdict("#chain-verdict", "bad", "Bug reproduced: you rewrote history and verification still says OK.",
+      "Without an external checkpoint, a chain that was truncated or fully re-hashed is internally consistent. Turn the checkpoint back on (my code) and look again.");
     record("chain", "broke");
   } else {
     const first = v.issues[0];
@@ -502,8 +507,8 @@ $("#approve-actions").addEventListener("click", async (e) => {
       record("approve", "tried");
     } else {
       meta("approve", `${incident.id} · closed illegitimately`, "bad");
-      verdict("#approve-verdict", "bad", `INC-1042 is closed, and an audit says it should not be: ${esc(audit.reason)}.`,
-        "When “resolved” is just a status field guarded in the UI, anyone who can send the request can close it. Turn on server-side enforcement and try again.");
+      verdict("#approve-verdict", "bad", `Bug reproduced: INC-1042 is closed, and an audit says it should not be: ${esc(audit.reason)}.`,
+        "When “resolved” is just a status field guarded in the UI, anyone who can send the request can close it. Turn on server enforcement (my code) and try the same thing.");
       record("approve", "broke");
     }
   } else if (!res.ok && enforce && ["approve", "resolve"].includes(type) && [403, 412].includes(res.status)) {
