@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nishant - Backend Engineer - Resume</title>
+  <meta name="description" content="Resume of Nishant, backend engineer: concurrency control, idempotent payment APIs, exact money arithmetic and tamper-evident audit logs. Every claim links to the code.">
+  <meta name="author" content="Nishant">
+  <meta property="og:title" content="Nishant, Backend Engineer: resume">
+  <meta property="og:description" content="Every claim on this resume links to the line of code that proves it.">
+  <meta property="og:image" content="https://devnishantt.github.io/og.png">
+  <meta name="theme-color" content="#07080a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Cpath d='M9.5 22.5v-13l13 13v-13' fill='none' stroke='%23f2f3f5' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preload" href="../fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="resume.css">
+</head>
+<body>
+  <nav class="toolbar" aria-label="Resume actions">
+    <a class="tb-back" href="../">&larr; Portfolio</a>
+    <p class="tb-note">Every claim links to the line of code that proves it.</p>
+    <div class="tb-actions">
+      <button class="tb-btn" id="print-resume" type="button">Print</button>
+      <a class="tb-btn tb-primary" id="download-resume" href="Nishant_Backend_Engineer_Resume.pdf" download>Download PDF</a>
+    </div>
+  </nav>
+
+  <main class="sheet" id="resume">
+    <header class="masthead">
+      <div class="who">
+        <h1>Nishant</h1>
+        <p class="role">Backend Engineer <span>TypeScript · Node.js · Python · PostgreSQL</span></p>
+        <ul class="contact">
+          <li><a href="mailto:nishanttgithub@gmail.com">nishanttgithub@gmail.com</a></li>
+          <li><a href="https://devnishantt.github.io/">devnishantt.github.io</a></li>
+          <li><a href="https://github.com/devnishantt">github.com/devnishantt</a></li>
+        </ul>
+      </div>
+      <a class="qr-wrap" href="https://devnishantt.github.io/" aria-label="Open the live portfolio">
+        <svg class="qr" viewBox="0 0 29 29" role="img" aria-label="QR code linking to devnishantt.github.io" shape-rendering="crispEdges"><path fill="currentColor" d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM9 0h1v1h-1zM10 0h1v1h-1zM13 0h1v1h-1zM16 0h1v1h-1zM19 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM25 0h1v1h-1zM26 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM12 1h1v1h-1zM13 1h1v1h-1zM14 1h1v1h-1zM15 1h1v1h-1zM17 1h1v1h-1zM18 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM9 3h1v1h-1zM11 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM18 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM25 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM10 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM11 5h1v1h-1zM12 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM19 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM10 7h1v1h-1zM14 7h1v1h-1zM17 7h1v1h-1zM19 7h1v1h-1zM20 7h1v1h-1zM0 8h1v1h-1zM3 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1zM12 8h1v1h-1zM15 8h1v1h-1zM21 8h1v1h-1zM23 8h1v1h-1zM0 9h1v1h-1zM1 9h1v1h-1zM5 9h1v1h-1zM8 9h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM25 9h1v1h-1zM28 9h1v1h-1zM1 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM8 10h1v1h-1zM11 10h1v1h-1zM16 10h1v1h-1zM19 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM25 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM5 11h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM18 11h1v1h-1zM23 11h1v1h-1zM24 11h1v1h-1zM26 11h1v1h-1zM27 11h1v1h-1zM0 12h1v1h-1zM1 12h1v1h-1zM3 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM10 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM20 12h1v1h-1zM21 12h1v1h-1zM22 12h1v1h-1zM25 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM0 13h1v1h-1zM1 13h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM9 13h1v1h-1zM10 13h1v1h-1zM12 13h1v1h-1zM15 13h1v1h-1zM17 13h1v1h-1zM19 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM11 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM18 14h1v1h-1zM22 14h1v1h-1zM23 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM0 15h1v1h-1zM2 15h1v1h-1zM3 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM1 16h1v1h-1zM6 16h1v1h-1zM7 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM11 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM21 16h1v1h-1zM23 16h1v1h-1zM27 16h1v1h-1zM5 17h1v1h-1zM8 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM11 17h1v1h-1zM15 17h1v1h-1zM17 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM28 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM7 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM13 18h1v1h-1zM17 18h1v1h-1zM20 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM2 19h1v1h-1zM3 19h1v1h-1zM4 19h1v1h-1zM5 19h1v1h-1zM8 19h1v1h-1zM10 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM15 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM20 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM0 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM8 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM14 20h1v1h-1zM16 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM8 21h1v1h-1zM13 21h1v1h-1zM15 21h1v1h-1zM16 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM0 22h1v1h-1zM1 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM18 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM27 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM10 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM16 23h1v1h-1zM18 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM26 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM14 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM27 24h1v1h-1zM0 25h1v1h-1zM2 25h1v1h-1zM3 25h1v1h-1zM4 25h1v1h-1zM6 25h1v1h-1zM8 25h1v1h-1zM9 25h1v1h-1zM11 25h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM14 25h1v1h-1zM15 25h1v1h-1zM16 25h1v1h-1zM20 25h1v1h-1zM22 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM25 25h1v1h-1zM26 25h1v1h-1zM28 25h1v1h-1zM0 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM10 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM9 27h1v1h-1zM10 27h1v1h-1zM11 27h1v1h-1zM12 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM21 27h1v1h-1zM23 27h1v1h-1zM27 27h1v1h-1zM0 28h1v1h-1zM1 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM9 28h1v1h-1zM12 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM17 28h1v1h-1zM18 28h1v1h-1zM20 28h1v1h-1zM21 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM27 28h1v1h-1z"/></svg>
+        <span>Try to break<br>my backends</span>
+      </a>
+    </header>
+
+    <section class="block summary" aria-labelledby="h-summary">
+      <h2 id="h-summary">Summary</h2>
+      <p>Backend engineer focused on the parts of a system that are expensive to get wrong: <b>concurrent money movement, idempotent payment APIs, exact money arithmetic, tamper-evident audit logs and approval workflows</b>. Failure cases are covered by tests, every project below runs CI on each push, and my portfolio lets you try to break these guarantees in five live labs.</p>
+    </section>
+
+    <section class="block" aria-labelledby="h-projects">
+      <h2 id="h-projects">Selected projects <span class="h-note">code links point to the exact lines</span></h2>
+      
+        <article class="project">
+          <header class="project-head">
+            <h3><a href="https://github.com/devnishantt/bank-management-system">Bank Management System</a></h3>
+            <span class="stack">TypeScript · Express 5 · PostgreSQL · Prisma · Docker</span>
+          </header>
+          <p class="project-what">Retail banking REST API: accounts, deposits, withdrawals and transfers.</p>
+          <ul><li>Locked every account a request touches with <b>SELECT … FOR UPDATE in id order</b>, so racing transfers queue instead of losing updates or deadlocking; a test fires <b>10 parallel withdrawals</b> of 30.00 at 100.00 and asserts exactly 3 succeed. <a class="proof" href="https://github.com/devnishantt/bank-management-system/blob/9d8f7b3415cacd27461a28ac1ae0820a1b0f714c/src/modules/transactions/transactions.service.ts#L29" title="See the code that proves this">code</a> <a class="proof" href="https://github.com/devnishantt/bank-management-system/blob/9d8f7b3415cacd27461a28ac1ae0820a1b0f714c/tests/transactions.test.ts#L125" title="See the code that proves this">test</a></li><li>Built <b>idempotent payments</b>: an <code>Idempotency-Key</code> replays the original result on retry, a reused key with a new body returns 422, and a unique index settles racing duplicates. <a class="proof" href="https://github.com/devnishantt/bank-management-system/blob/9d8f7b3415cacd27461a28ac1ae0820a1b0f714c/src/modules/transactions/transactions.service.ts#L54" title="See the code that proves this">code</a></li><li>Money as <b>BigInt minor units</b> in a double-entry ledger whose credits minus debits must equal total balances, with <code>CHECK</code> constraints as a last line of defence. <a class="proof" href="https://github.com/devnishantt/bank-management-system/blob/9d8f7b3415cacd27461a28ac1ae0820a1b0f714c/src/lib/money.ts#L7" title="See the code that proves this">code</a> <a class="proof" href="https://github.com/devnishantt/bank-management-system/blob/9d8f7b3415cacd27461a28ac1ae0820a1b0f714c/prisma/migrations/20261030180943_init/migration.sql#L145" title="See the code that proves this">code</a></li><li>Refresh tokens stored only as SHA-256 hashes; replaying a rotated token <b>revokes the whole token family</b>. <a class="proof" href="https://github.com/devnishantt/bank-management-system/blob/9d8f7b3415cacd27461a28ac1ae0820a1b0f714c/src/modules/auth/auth.service.ts#L77" title="See the code that proves this">code</a></li></ul>
+        </article>
+        <article class="project">
+          <header class="project-head">
+            <h3><a href="https://github.com/devnishantt/ledgerline">Ledgerline</a></h3>
+            <span class="stack">React · TypeScript · Hono · Cloudflare D1 · Zod</span>
+          </header>
+          <p class="project-what">Reconciles bank statements against ledger records without silently signing off on differences.</p>
+          <ul><li>Matching that <b>refuses to guess</b>: tied or conflicting candidates stay unresolved for a human; money is exact integer minor units per currency. <a class="proof" href="https://github.com/devnishantt/ledgerline/blob/6e5f4a24634d83c18e463f179c934c59149b240d/src/domain/matching.ts#L69" title="See the code that proves this">code</a></li><li><b>Independent review</b> (a run's creator cannot approve it) and a <b>hash-linked audit log</b> with chain verification, missing-tail detection and SQL immutability triggers; 150+ tests in CI. <a class="proof" href="https://github.com/devnishantt/ledgerline/blob/6e5f4a24634d83c18e463f179c934c59149b240d/src/server/reviews.ts#L39" title="See the code that proves this">code</a> <a class="proof" href="https://github.com/devnishantt/ledgerline/blob/6e5f4a24634d83c18e463f179c934c59149b240d/src/server/audit.ts#L81" title="See the code that proves this">code</a></li></ul>
+        </article>
+        <article class="project">
+          <header class="project-head">
+            <h3><a href="https://github.com/devnishantt/aftermark">Aftermark</a></h3>
+            <span class="stack">TypeScript · Fastify · Bun · Cloudflare D1 · OpenAPI</span>
+          </header>
+          <p class="project-what">Evidence-driven incident response API.</p>
+          <ul><li>Closing an incident needs <b>two non-creator approvals of the current SHA-256 evidence manifest</b>; new evidence makes earlier approvals stale. <a class="proof" href="https://github.com/devnishantt/aftermark/blob/de090d476aa6af416e59e484fe6d4cd776a6599a/src/modules/workflow.ts#L28" title="See the code that proves this">code</a> <a class="proof" href="https://github.com/devnishantt/aftermark/blob/de090d476aa6af416e59e484fe6d4cd776a6599a/src/modules/evidence.ts#L24" title="See the code that proves this">code</a></li><li>Optimistic concurrency: each write claims the next revision and a conflicting writer's whole batch rolls back; SQL triggers keep audit events append-only. <a class="proof" href="https://github.com/devnishantt/aftermark/blob/de090d476aa6af416e59e484fe6d4cd776a6599a/src/modules/incidents.ts#L64" title="See the code that proves this">code</a> <a class="proof" href="https://github.com/devnishantt/aftermark/blob/de090d476aa6af416e59e484fe6d4cd776a6599a/migrations/001_initial.sql#L94" title="See the code that proves this">code</a></li></ul>
+        </article>
+        <article class="project">
+          <header class="project-head">
+            <h3><a href="https://github.com/devnishantt/tracebench">Tracebench</a></h3>
+            <span class="stack">Python · DuckDB · Pydantic · Typer · pytest</span>
+          </header>
+          <p class="project-what">Local-first dataset contracts and drift reports for CSV, JSONL and Parquet.</p>
+          <ul><li>Drift checks report <b>&ldquo;incomparable&rdquo;</b> instead of a false &ldquo;stable&rdquo; when the data cannot support a verdict; bounded ingestion, fingerprinted reports, 100+ tests. <a class="proof" href="https://github.com/devnishantt/tracebench/blob/cc47fc2a9dcde69e1f40eee10713e6dc71b1ee60/src/tracebench/compare.py#L44" title="See the code that proves this">code</a></li></ul>
+        </article>
+        <article class="project">
+          <header class="project-head">
+            <h3><a href="https://github.com/devnishantt/Hospital-Management">Hospital Management API</a></h3>
+            <span class="stack">TypeScript · Express · Prisma · PostgreSQL · Redis</span>
+          </header>
+          <p class="project-what">Hospital operations backend with payments and role-based access.</p>
+          <ul><li>Razorpay payments verified by <b>HMAC-SHA256 signature</b>; TOTP two-factor auth, a Redis token blacklist and role-based access. <a class="proof" href="https://github.com/devnishantt/Hospital-Management/blob/c8cb96a4db2b830e79474b15585be162a6ef52df/src/services/paymentService.ts#L89" title="See the code that proves this">code</a></li></ul>
+        </article>
+    </section>
+
+
+    <section class="block oss" aria-labelledby="h-oss">
+      <h2 id="h-oss">Open source <span class="h-note">merged upstream</span></h2>
+      <ul>
+        <li><a href="https://github.com/foss42/apidash/pull/1828"><b>foss42/apidash</b> #1828</a> <span class="oss-sep">/</span> Kept disabled environment variables from being lost after pre-request scripts ran.</li>
+        <li><a href="https://github.com/CrossGL/crosstl/pull/3612"><b>CrossGL/crosstl</b> #3612</a> <span class="oss-sep">/</span> Aligned HIP <code>__constant__</code> binding numbering with the CUDA importer.</li>
+      </ul>
+    </section>
+
+    <section class="block skills" aria-labelledby="h-skills">
+      <h2 id="h-skills">Skills</h2>
+      <dl>
+        <div><dt>Languages</dt><dd>TypeScript, JavaScript, Python, SQL</dd></div>
+        <div><dt>Backend</dt><dd>Node.js, Express 5, Fastify, Hono, Bun, REST, OpenAPI, Zod, Pydantic</dd></div>
+        <div><dt>Data</dt><dd>PostgreSQL, Prisma, SQLite / Cloudflare D1, Redis, DuckDB, MySQL, MongoDB</dd></div>
+        <div><dt>Reliability</dt><dd>Row locking, optimistic concurrency, idempotency keys, double-entry ledgers, hash-chained audit logs</dd></div>
+        <div><dt>Security</dt><dd>JWT with refresh rotation, RBAC, HMAC signature checks, TOTP 2FA, rate limiting, input validation</dd></div>
+        <div><dt>Delivery</dt><dd>Vitest, pytest, Playwright, GitHub Actions, Docker, Cloudflare</dd></div>
+      </dl>
+    </section>
+
+    <footer class="sheet-foot">
+      <span>Portfolio: 5 live labs, unit and browser tests run on every deploy.</span>
+      <span>devnishantt.github.io</span>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("print-resume").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>

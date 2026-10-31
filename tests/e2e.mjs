@@ -111,6 +111,25 @@ step("scoreboard: 5 broken, 5/5 labs, survives reload");
 await page.locator("#status").screenshot({ path: `${SHOTS}/07-status.png` });
 await page.screenshot({ path: `${SHOTS}/08-full.png`, fullPage: true });
 
+// Resume: page renders, PDF is downloadable, fits one A4 page
+const pdf = await page.request.get(new URL("resume/Nishant_Backend_Engineer_Resume.pdf", BASE).href);
+assert.equal(pdf.status(), 200);
+assert.match(pdf.headers()["content-type"] || "", /pdf/);
+assert.ok((await pdf.body()).subarray(0, 5).toString() === "%PDF-", "resume is not a PDF");
+assert.equal(await page.locator('#contact-resume-download').getAttribute("download"), "");
+const resume = await browser.newPage({ viewport: { width: 1100, height: 1300 } });
+resume.on("pageerror", (e) => errors.push(`resume pageerror: ${e.message}`));
+await resume.goto(new URL("resume/", BASE).href, { waitUntil: "networkidle" });
+assert.match(await resume.textContent("h1"), /Nishant/);
+assert.ok((await resume.locator("a.proof").count()) >= 10, "resume should link claims to code");
+await resume.emulateMedia({ media: "print" });
+const fits = await resume.evaluate(() => { const s = document.querySelector(".sheet"); return s.scrollHeight <= s.clientHeight + 1; });
+assert.ok(fits, "resume overflows one A4 page");
+await resume.emulateMedia({ media: "screen" });
+await resume.screenshot({ path: `${SHOTS}/11-resume.png`, fullPage: true });
+await resume.close();
+step("resume: page renders, PDF downloads, fits one A4 page");
+
 // Mobile: no horizontal overflow
 const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
 mobile.on("pageerror", (e) => errors.push(`mobile pageerror: ${e.message}`));

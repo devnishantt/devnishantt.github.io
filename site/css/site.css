@@ -902,3 +902,22 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
   .compare-row { grid-template-columns: minmax(0, 1fr) auto; }
   .compare-bar { grid-column: 1 / -1; grid-row: 2; }
 }
+
+/* ---------------------------------------------------------------- resume links */
+
+.nav-resume { margin-left: 0; }
+.resume-card {
+  display: flex; align-items: center; gap: 16px; max-width: 640px; margin: 22px auto 0; padding: 16px 16px 16px 20px; text-align: left;
+  border: 1px solid var(--line-2); border-radius: var(--r-lg); background: rgba(255, 255, 255, 0.03);
+}
+.resume-icon { width: 28px; height: 28px; color: var(--accent); }
+.resume-text { flex: 1; min-width: 0; }
+.resume-text b { display: block; font-size: 15px; font-weight: 600; }
+.resume-text small { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.resume-actions { display: flex; gap: 8px; flex: none; }
+@media (max-width: 1080px) { .nav-resume span { display: none; } .nav-resume { width: 32px; padding: 0; } }
+@media (max-width: 640px) {
+  .resume-card { flex-wrap: wrap; }
+  .resume-actions { width: 100%; }
+  .resume-actions .btn { flex: 1; }
+}

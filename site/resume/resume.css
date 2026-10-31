@@ -1,0 +1,157 @@
+/* Resume: one A4 page. Screen = paper on a dark desk; print/PDF = the paper only. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/jetbrains-mono-var.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  --ink: #111318;
+  --ink-2: #3b404a;
+  --ink-3: #6b717c;
+  --rule: #e3e5e9;
+  --accent: #2f4fd8;
+  --accent-bg: #eef1fd;
+  --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: #07080a; color: var(--ink);
+  font: 400 10pt/1.45 var(--sans); font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+b { font-weight: 620; color: var(--ink); }
+code { font: 500 0.9em var(--mono); padding: 0 0.25em; border-radius: 3px; background: #f1f2f4; }
+
+/* ---------------------------------------------------------------- toolbar (screen only) */
+
+.toolbar {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 16px; padding: 12px 24px;
+  background: rgba(7, 8, 10, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #eef0f3;
+  font: 500 14px var(--sans);
+}
+.tb-back { color: #b4b9c2; }
+.tb-back:hover { color: #fff; }
+.tb-note { margin: 0 auto 0 0; color: #7d838e; font-size: 13px; }
+.tb-actions { display: flex; gap: 8px; }
+.tb-btn {
+  display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.04); color: #eef0f3;
+  font: 600 13.5px var(--sans); cursor: pointer; transition: background 0.18s, border-color 0.18s;
+}
+.tb-btn:hover { background: rgba(255, 255, 255, 0.09); border-color: rgba(255, 255, 255, 0.24); }
+.tb-primary { background: #eef0f3; color: #0a0b0d; border-color: transparent; }
+.tb-primary:hover { background: #fff; }
+
+/* ---------------------------------------------------------------- the sheet */
+
+.sheet {
+  width: 210mm; min-height: 297mm; margin: 32px auto 64px; padding: 10mm 13mm 7mm;
+  background: #fff; border-radius: 4px;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  display: flex; flex-direction: column;
+}
+
+.masthead { display: flex; justify-content: space-between; gap: 8mm; padding-bottom: 4mm; border-bottom: 2px solid var(--ink); }
+.who h1 { margin: 0; font-size: 25pt; line-height: 1; font-weight: 750; letter-spacing: -0.04em; }
+.role { margin: 2.2mm 0 0; font-size: 12pt; font-weight: 600; letter-spacing: -0.01em; }
+.role span { margin-left: 6px; font: 500 8.6pt var(--mono); color: var(--ink-3); letter-spacing: 0; }
+.contact { display: flex; flex-wrap: wrap; gap: 1mm 5mm; margin: 3.2mm 0 0; padding: 0; list-style: none; font: 500 8.8pt var(--mono); color: var(--ink-2); }
+.contact a { border-bottom: 1px solid var(--rule); }
+.contact a:hover { color: var(--accent); border-color: var(--accent); }
+.qr-wrap { display: grid; justify-items: center; align-content: start; gap: 1.6mm; flex: none; color: var(--ink); }
+.qr { width: 19mm; height: 19mm; }
+.qr-wrap span { font: 600 6.6pt/1.25 var(--mono); text-align: center; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; }
+
+.block { margin-top: 3mm; }
+.block h2 {
+  display: flex; align-items: baseline; gap: 8px; margin: 0 0 1.6mm; padding-bottom: 1mm; border-bottom: 1px solid var(--rule);
+  font: 700 8.4pt var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink);
+}
+.h-note { margin-left: auto; font-weight: 500; font-size: 7.4pt; letter-spacing: 0.02em; text-transform: none; color: var(--ink-3); }
+.summary p { margin: 0; color: var(--ink-2); font-size: 8.9pt; line-height: 1.42; }
+
+.project { margin-top: 1.7mm; break-inside: avoid; }
+.project:first-of-type { margin-top: 0; }
+.project-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.project h3 { margin: 0; font-size: 10.6pt; font-weight: 700; letter-spacing: -0.015em; }
+.project h3 a:hover { color: var(--accent); }
+.stack { font: 500 7.8pt var(--mono); color: var(--ink-3); text-align: right; }
+.project-what { margin: 0 0 0.3mm; color: var(--ink-3); font-size: 8.4pt; font-style: italic; }
+.project ul, .oss ul { margin: 0; padding-left: 4.2mm; }
+.project li, .oss li { margin-top: 0.4mm; color: var(--ink-2); font-size: 8.6pt; line-height: 1.36; }
+.project li::marker, .oss li::marker { color: var(--ink-3); }
+.proof {
+  display: inline-block; margin-left: 3px; padding: 0 5px; border-radius: 3px; vertical-align: 1px;
+  background: var(--accent-bg); color: var(--accent); font: 600 7pt/1.6 var(--mono); letter-spacing: 0.04em; text-transform: uppercase;
+}
+.proof::before { content: "\2197\00a0"; }
+.proof:hover { background: var(--accent); color: #fff; }
+
+.oss li a b { color: var(--ink); }
+.oss li a:hover b { color: var(--accent); }
+.oss-sep { color: var(--rule); margin: 0 2px; }
+
+.skills dl { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1mm 8mm; }
+.skills dl > div { display: grid; grid-template-columns: 20mm 1fr; gap: 3mm; }
+.skills dt { font: 600 7.8pt/1.6 var(--mono); color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.05em; }
+.skills dd { margin: 0; font-size: 8.6pt; line-height: 1.4; color: var(--ink-2); }
+
+.sheet-foot {
+  display: flex; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 2.4mm; border-top: 1px solid var(--rule);
+  font: 500 7.6pt var(--mono); color: var(--ink-3);
+}
+
+/* ---------------------------------------------------------------- small screens */
+
+@media screen and (max-width: 860px) {
+  .tb-note { display: none; }
+  .tb-actions { margin-left: auto; }
+  .sheet { width: auto; min-height: 0; margin: 16px; padding: 24px 20px; font-size: 15px; }
+  .masthead { flex-direction: column-reverse; }
+  .qr-wrap { display: none; }
+  .who h1 { font-size: 34px; }
+  .role { font-size: 17px; }
+  .role span { display: block; margin: 6px 0 0; font-size: 12px; }
+  .contact { font-size: 13px; gap: 6px 14px; }
+  .block { margin-top: 24px; }
+  .block h2 { font-size: 12px; flex-wrap: wrap; }
+  .h-note { margin-left: 0; font-size: 11px; }
+  .summary p, .project li, .oss li { font-size: 14.5px; }
+  .project { margin-top: 18px; }
+  .project h3 { font-size: 16px; }
+  .project-head { flex-direction: column; gap: 2px; }
+  .stack { text-align: left; font-size: 11.5px; }
+  .project-what { font-size: 14px; }
+  .proof { font-size: 10px; }
+  .skills dl { grid-template-columns: 1fr; gap: 10px; }
+  .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
+  .skills dt { font-size: 11px; }
+  .skills dd { font-size: 14.5px; }
+  .sheet-foot { flex-direction: column; margin-top: 24px; font-size: 11px; }
+}
+
+/* ---------------------------------------------------------------- print / PDF */
+
+@page { size: A4; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .toolbar { display: none; }
+  .sheet { width: 210mm; height: 297mm; min-height: 0; margin: 0; border-radius: 0; box-shadow: none; overflow: hidden; }
+  a { color: inherit; }
+  .proof, code { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

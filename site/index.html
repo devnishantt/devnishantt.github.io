@@ -32,6 +32,8 @@
       <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
       <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></symbol>
       <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8.5 8.5M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3.5H7.5A2 2 0 0 0 5.5 5.5v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M9 12.5h6M9 16h6"/></symbol>
       <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
       <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/></symbol>
       <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" stroke="none" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol>
@@ -50,9 +52,11 @@
         <li><a href="#labs">Labs</a></li>
         <li><a href="#status">Status</a></li>
         <li><a href="#work">Work</a></li>
+        <li><a href="resume/">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <a class="status-pill" id="nav-status" href="#status" aria-live="polite"><span class="dot"></span><span class="label">checking CI</span></a>
+      <a class="btn btn-small btn-ghost nav-resume" href="resume/Nishant_Backend_Engineer_Resume.pdf" download><svg class="i"><use href="#i-download"/></svg><span>Resume</span></a>
       <a class="btn btn-small btn-light nav-email" href="mailto:nishanttgithub@gmail.com"><svg class="i"><use href="#i-mail"/></svg><span>Email me</span></a>
     </nav>
   </header>
@@ -70,6 +74,7 @@
         <div class="cta-row reveal">
           <a class="btn btn-light btn-lg" href="#lab-race">Start breaking things<svg class="i"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-ghost btn-lg" href="mailto:nishanttgithub@gmail.com"><svg class="i"><use href="#i-mail"/></svg>nishanttgithub@gmail.com</a>
+          <a class="btn btn-quiet btn-lg" id="hero-resume" href="resume/"><svg class="i"><use href="#i-doc"/></svg>Resume</a>
         </div>
         <ul class="proof reveal" aria-label="How this site is built">
           <li><b>24</b> unit tests on the lab logic</li>
@@ -342,6 +347,17 @@
           <a class="email-link" id="contact-email" href="mailto:nishanttgithub@gmail.com?subject=Hello%20Nishant">nishanttgithub@gmail.com</a>
           <button class="btn btn-ghost" id="copy-email" type="button" data-email="nishanttgithub@gmail.com"><svg class="i"><use href="#i-copy"/></svg><span>Copy</span></button>
         </div>
+        <div class="resume-card" id="resume-card">
+          <svg class="i resume-icon" aria-hidden="true"><use href="#i-doc"/></svg>
+          <div class="resume-text">
+            <b>One-page resume</b>
+            <small>Every claim links to the exact line of code that proves it. PDF, A4.</small>
+          </div>
+          <div class="resume-actions">
+            <a class="btn btn-ghost" href="resume/">View</a>
+            <a class="btn btn-light" id="contact-resume-download" href="resume/Nishant_Backend_Engineer_Resume.pdf" download><svg class="i"><use href="#i-download"/></svg>Download PDF</a>
+          </div>
+        </div>
         <div class="cta-row">
           <a class="btn btn-light btn-lg" href="mailto:nishanttgithub@gmail.com?subject=Hello%20Nishant"><svg class="i"><use href="#i-mail"/></svg>Email me</a>
           <a class="btn btn-ghost btn-lg" href="https://github.com/devnishantt"><svg class="i"><use href="#i-github"/></svg>github.com/devnishantt</a>
@@ -356,6 +372,8 @@
       <p class="footer-brand"><span class="brand-mark" aria-hidden="true">N</span>Nishant &middot; backend engineer</p>
       <p class="footer-links">
         <a href="mailto:nishanttgithub@gmail.com">nishanttgithub@gmail.com</a>
+        <a href="resume/">Resume</a>
+        <a href="resume/Nishant_Backend_Engineer_Resume.pdf" download>Resume PDF</a>
         <a href="https://github.com/devnishantt">GitHub</a>
         <a href="https://github.com/devnishantt/devnishantt.github.io">Source</a>
         <a href="#top">Back to top</a>
