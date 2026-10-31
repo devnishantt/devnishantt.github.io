@@ -57,6 +57,15 @@ function record(lab, outcome) {
   }
 }
 
+const runs = {};
+/** Start a new run for a lab: clear the stale verdict and return a guard that is false once superseded. */
+function startRun(lab) {
+  runs[lab] = (runs[lab] || 0) + 1;
+  const mine = runs[lab];
+  $(`#${lab}-verdict`).innerHTML = "";
+  return () => runs[lab] === mine;
+}
+
 function verdict(target, kind, title, why) {
   const tag = { bad: "BROKEN", good: "HELD", info: "NOTE" }[kind];
   $(target).innerHTML = `<div class="verdict-box ${kind}"><span class="verdict-tag">${tag}</span><p><b>${title}</b></p>${why ? `<p class="why">${why}</p>` : ""}</div>`;
@@ -79,10 +88,10 @@ function showRaceSql() {
 }
 
 function runRace() {
+  const current = startRun("race");
   const mode = raceMode();
-  // In the unsafe mode, look for an interleaving that breaks, the way a real system eventually finds one.
-  let r = race.simulate({ mode, seed: raceSeed++ });
-  if (mode === "naive") for (let i = 0; i < 40 && !r.broken; i++) r = race.simulate({ mode, seed: raceSeed++ });
+  // One run, one random interleaving. No retrying until it breaks: the failure rate shown is the real one.
+  const r = race.simulate({ mode, seed: raceSeed++ });
 
   const lanes = r.transactions.map((t) => {
     const items = r.events.map((e, i) => ({ e, i })).filter(({ e }) => e.tx === t.id);
@@ -100,12 +109,13 @@ function runRace() {
 
   const delay = reduced ? 0 : r.events.length * 110 + 150;
   setTimeout(() => {
+    if (!current()) return;
     if (r.broken) {
       verdict("#race-verdict", "bad", `The bank paid out ${r.paidOut} from an account that held ${r.initial}.`,
         `Both transactions read the balance before either wrote it, so both saw ${r.initial} and both approved. The second write overwrote the first. That is a lost update, and ${r.missing} just left the building.`);
       record("race", "broke");
     } else if (mode === "naive") {
-      verdict("#race-verdict", "info", "This interleaving happened to be safe.", "Run it again or race 1,000 times: the bug only needs the reads to overlap once.");
+      verdict("#race-verdict", "info", "This interleaving happened to be safe.", "The reads did not overlap this time. Race again, or race 1,000 times to see how often they do: the bug only needs it once.");
       record("race", "tried");
     } else {
       verdict("#race-verdict", "good", `Exactly one withdrawal went through. ${r.initial} in, ${r.paidOut} out, ${r.final} left.`,
@@ -118,6 +128,7 @@ function runRace() {
 }
 
 function raceMany() {
+  startRun("race");
   const mode = raceMode();
   const n = 1000;
   const r = race.breakRate({ runs: n, firstSeed: raceSeed, mode });
@@ -160,6 +171,7 @@ showRaceSql();
 $("#retry-lost").addEventListener("input", (e) => { $("#retry-lost-out").textContent = e.target.value; });
 
 $("#retry-run").addEventListener("click", () => {
+  const current = startRun("retry");
   const idempotency = $("#retry-key").checked;
   const lostCount = Number($("#retry-lost").value);
   const r = retry.simulate({
@@ -174,6 +186,7 @@ $("#retry-run").addEventListener("click", () => {
   }).join("");
 
   setTimeout(() => {
+    if (!current()) return;
     if (r.broken) {
       verdict("#retry-verdict", "bad", `One payment, ${r.charges.length} charges: the customer paid ${r.totalCharged} for a ${r.intended} order.`,
         "The server cannot tell a retry from a new payment, so every timeout becomes another charge. The client did nothing wrong: retrying is correct behaviour.");
@@ -453,7 +466,10 @@ function renderStatus(status) {
   $("#status-list").innerHTML = status.repos.map((r) => {
     const latest = r.latest;
     const cls = !latest ? "none" : latest.conclusion === "success" ? "ok" : "bad";
-    const bars = r.history.map((h, i) => {
+    const SLOTS = 30;
+    const empty = Array.from({ length: Math.max(0, SLOTS - r.history.length) },
+      (_, i) => `<span class="empty" style="animation-delay:${reduced ? 0 : i * 25}ms" title="no run recorded yet"></span>`).join("");
+    const bars = empty + r.history.slice(-SLOTS).map((h, i) => {
       const c = h.conclusion === "success" ? "ok" : h.conclusion === "failure" ? "bad" : "other";
       return `<a class="${c}" href="${esc(h.url)}" style="animation-delay:${reduced ? 0 : i * 25}ms" title="${esc(h.workflow)} · ${esc(h.sha)} · ${esc(h.conclusion)} · ${h.seconds}s"></a>`;
     }).join("");
