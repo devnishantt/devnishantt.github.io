@@ -18,6 +18,21 @@ to break them. Each lab contains two versions of the same code: a **common bug**
 Your progress (bugs found in the common-bug versions, attacks my code survived) is kept in `localStorage`. "Compare 1,000 races" in lab 01 runs the bug and both fixes on the same 1,000 random timings side by side.
 There is also a status page with recent main-branch CI runs for each featured repository.
 
+## Resume
+
+A one-page resume lives at [`/resume/`](https://devnishantt.github.io/resume/) with a downloadable
+[PDF](https://devnishantt.github.io/resume/Nishant_Backend_Engineer_Resume.pdf). Every claim links to the
+exact line of code (pinned to a commit) that proves it.
+
+The PDF is generated from the HTML page, so the two never drift apart:
+
+```sh
+npm run serve            # in one shell
+npm run resume:pdf       # in another; fails if the resume no longer fits one A4 page
+```
+
+The browser test checks that the page renders, that the PDF downloads, and that it still fits one page.
+
 ## How it works
 
 - **No framework, no build step.** Hand-written HTML and CSS, plus ES modules served as-is.

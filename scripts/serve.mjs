@@ -6,7 +6,8 @@ import { extname, join, normalize, resolve } from "node:path";
 const ROOT = resolve(new URL("../site", import.meta.url).pathname);
 const PORT = Number(process.env.PORT || 3000);
 const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8",
-  ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".ico": "image/x-icon", ".txt": "text/plain; charset=utf-8" };
+  ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".ico": "image/x-icon", ".txt": "text/plain; charset=utf-8",
+  ".pdf": "application/pdf", ".woff2": "font/woff2" };
 
 createServer(async (req, res) => {
   try {
