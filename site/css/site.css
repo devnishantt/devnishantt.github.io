@@ -227,8 +227,8 @@ h2 { font-size: clamp(34px, 4.6vw, 54px); }
 }
 .kicker { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px 6px; margin: 0 0 28px; text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--text-2); }
 .kicker-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 4px rgba(62, 224, 154, 0.15); margin-right: 6px; }
-#hero h1 { font-size: clamp(52px, 8.4vw, 112px); line-height: 0.95; letter-spacing: -0.055em; font-weight: 700; }
-.h1-line { display: block; }
+#hero h1 { font-size: clamp(52px, 6.4vw, 92px); line-height: 0.95; letter-spacing: -0.055em; font-weight: 700; }
+.h1-line { display: block; white-space: nowrap; }
 .h1-dim {
   background: linear-gradient(180deg, #8d939d 0%, #4a4f57 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -258,7 +258,7 @@ h2 { font-size: clamp(34px, 4.6vw, 54px); }
 }
 .lede { max-width: 560px; margin: 30px 0 0; color: var(--text-2); font-size: 18.5px; line-height: 1.65; text-wrap: pretty; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
-.proof { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 44px 0 0; padding: 22px 0 0; list-style: none; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
+.proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 24px; margin: 44px 0 0; padding: 22px 0 0; list-style: none; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
 .proof b { display: block; color: var(--text); font: 600 22px/1.2 var(--mono); letter-spacing: -0.03em; margin-bottom: 2px; }
 
 /* monitor */
@@ -808,7 +808,8 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
   #hero h1 { font-size: clamp(46px, 14vw, 64px); }
   .lede { font-size: 16.5px; }
   .cta-row .btn-lg { width: 100%; }
-  .proof { gap: 14px 22px; }
+  .proof { gap: 12px 14px; font-size: 12px; line-height: 1.4; }
+  .proof b { font-size: 19px; }
   .monitor-foot { gap: 16px; }
   .lab { border-radius: var(--r-lg); }
   .lab-head { grid-template-columns: minmax(0, 1fr) auto; padding: 20px 18px 18px; gap: 12px; }

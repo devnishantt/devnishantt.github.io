@@ -22,7 +22,7 @@ await page.goto(BASE, { waitUntil: "networkidle" });
 await page.evaluate(() => localStorage.clear());
 await page.reload({ waitUntil: "networkidle" });
 assert.equal(await page.title(), "Nishant · try to break my backends");
-await page.waitForSelector("#chain-table tbody tr");
+await page.waitForSelector("#chain-list .chain-row");
 await page.waitForSelector("#status-list li");
 step("page loads, status and chain render");
 await page.screenshot({ path: `${SHOTS}/01-hero.png` });
@@ -68,7 +68,7 @@ await page.locator("#lab-money").screenshot({ path: `${SHOTS}/04-money.png` });
 step("money: float split loses a cent, extra precision is rejected");
 
 // Lab 04
-const amount = page.locator('#chain-table input[data-i="2"]');
+const amount = page.locator('#chain-list input[data-i="2"]');
 await amount.fill("-3.00");
 await amount.dispatchEvent("change");
 assert.equal(await verdict("chain"), "HELD");

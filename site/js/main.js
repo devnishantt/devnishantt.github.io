@@ -207,9 +207,12 @@ function raceMany() {
       <div class="${r.broken ? "bad" : "good"}">money from nothing<b>${r.broken.toLocaleString()}</b></div>
       <div class="${r.broken ? "bad" : "good"}">failure rate<b>${pct}%</b></div>
     </div>`;
+  const bad = $("#race-board .h-bad");
+  const good = $("#race-board .h-good");
   requestAnimationFrame(() => requestAnimationFrame(() => {
-    $(".h-bad").style.width = `${pct}%`;
-    $(".h-good").style.width = `${100 - pct}%`;
+    if (!bad.isConnected) return; // board was replaced (mode switched) before the animation started
+    bad.style.width = `${pct}%`;
+    good.style.width = `${100 - pct}%`;
   }));
   if (r.broken) {
     meta("race", `${n} schedules · ${pct}% broken`, "bad");
